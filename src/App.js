@@ -1,23 +1,23 @@
-import logo from './logo.svg';
+import React from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import Header from './components/Header';
+import Sidebar from './components/Sidebar';
+import SimulationPage from './pages/SimulationPage';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app-container">
+      <Sidebar />
+      <div className="main-content">
+        <Header />
+        <main className="content-area">
+          <Routes>
+            <Route path="/" element={<Navigate to="/simulasyon/serbest-dusme" />} />
+            <Route path="/simulasyon/:simulationName" element={<SimulationPage />} />
+          </Routes>
+        </main>
+      </div>
     </div>
   );
 }
