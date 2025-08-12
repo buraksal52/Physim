@@ -1,3 +1,6 @@
+// =============================
+// File: src/simulations/SerbestDusme/SerbestDusmeSimulation.js
+// =============================
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { Line } from 'react-chartjs-2';
 import {
@@ -28,7 +31,7 @@ const Matter = {
     create: () => ({
       world: { bodies: [], gravity: { x: 0, y: 9.81 } }, // Doğru yerçekimi değeri
       timing: { timeScale: 1 },
-      deltaTime: 1 / 60 // 60 FPS için uygun delta time
+      deltaTime: 1 / 60 // 60 FPS
     }),
     update: (engine) => {
       const dt = engine.deltaTime;
@@ -36,18 +39,18 @@ const Matter = {
       
       engine.world.bodies.forEach(body => {
         if (!body.isStatic) {
-          // Yerçekimi ivmesini doğru uygula (a = g, v = v₀ + gt)
+          // Yerçekimi (a = g, v = v₀ + gt)
           const gravityAcceleration = engine.world.gravity.y; // m/s²
           const gravityVelocityChange = gravityAcceleration * dt; // m/s
-          const gravityVelocityChangePixels = gravityVelocityChange * pixelsPerMeter; // pixels/s
+          const gravityVelocityChangePixels = gravityVelocityChange * pixelsPerMeter; // px/s
           
           body.velocity.y += gravityVelocityChangePixels;
           
-          // Pozisyon güncelleme (s = s₀ + vt)
+          // Pozisyon (s = s₀ + vt)
           body.position.x += body.velocity.x * dt;
           body.position.y += body.velocity.y * dt;
           
-          // Zemin çarpışma kontrolü
+          // Zemin çarpışma
           const groundBody = engine.world.bodies.find(b => b.label === 'ground');
           if (groundBody) {
             const groundTop = groundBody.position.y - 20;
@@ -57,7 +60,7 @@ const Matter = {
               body.position.y = groundTop - 20;
               body.velocity.y = -body.velocity.y * body.restitution;
               
-              // Çok küçük zıplamalar için durdurma
+              // Çok küçük zıplamaları öldür
               if (Math.abs(body.velocity.y) < 0.5 * pixelsPerMeter) {
                 body.velocity.y = 0;
                 body.velocity.x *= 0.95;
@@ -65,7 +68,7 @@ const Matter = {
             }
           }
           
-          // Yan duvar çarpışmaları
+          // Yan duvarlar
           if (body.position.x < 20) {
             body.position.x = 20;
             body.velocity.x = -body.velocity.x * body.restitution;
@@ -107,9 +110,7 @@ const Matter = {
         world.bodies.push(body);
       }
     },
-    clear: (world) => {
-      world.bodies = [];
-    }
+    clear: (world) => { world.bodies = []; }
   },
   Body: {
     setPosition: (body, position) => {
@@ -120,9 +121,7 @@ const Matter = {
       body.velocity.x = velocity.x;
       body.velocity.y = velocity.y;
     },
-    setAngularVelocity: (body, velocity) => {
-      body.angularVelocity = velocity;
-    }
+    setAngularVelocity: (body, velocity) => { body.angularVelocity = velocity; }
   }
 };
 
@@ -138,6 +137,14 @@ const initialChartData = {
       tension: 0.1,
     },
   ],
+};
+
+// Yüksekliği (metre) hesaplayan yardımcı fonksiyon
+const calculateHeightMeters = (ballY, canvasHeight, pixelsPerMeter) => {
+  const groundTop = canvasHeight - 40;
+  const ballBottom = ballY + 20;
+  const heightInPixels = Math.max(0, groundTop - ballBottom);
+  return heightInPixels / pixelsPerMeter;
 };
 
 const SerbestDusmeSimulation = ({ resetKey = 0, onDataUpdate }) => {
@@ -165,22 +172,19 @@ const SerbestDusmeSimulation = ({ resetKey = 0, onDataUpdate }) => {
   const pixelsPerMeter = 50;
   const maxDataPoints = 150;
 
-  const calculateHeightMeters = (ballY) => {
-    const groundTop = canvasHeight - 40;
-    const ballBottom = ballY + 20;
-    const heightInPixels = Math.max(0, groundTop - ballBottom);
-    return heightInPixels / pixelsPerMeter;
-  };
-  
   const stopSimulation = useCallback(() => setIsSimulationRunning(false), []);
 
+  // Engine + Body kurulumu — ballPosition'a BAĞLI DEĞİL (CI hatasını engellemek için)
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     canvas.width = canvasWidth;
     canvas.height = canvasHeight;
+
+    // Engine & Bodies
     engineRef.current = Matter.Engine.create();
-    ballRef.current = Matter.Bodies.circle(ballPosition.x, ballPosition.y, 20, {
+    const initialPos = { x: 300, y: 50 };
+    ballRef.current = Matter.Bodies.circle(initialPos.x, initialPos.y, 20, {
       restitution: 0.75,
       friction: 0,
       density: 0.01,
@@ -191,11 +195,14 @@ const SerbestDusmeSimulation = ({ resetKey = 0, onDataUpdate }) => {
       label: 'ground'
     });
     Matter.World.add(engineRef.current.world, [ballRef.current, groundRef.current]);
-    setInitialHeight(calculateHeightMeters(ballPosition.y));
+
+    // Başlangıç yüksekliği
+    setInitialHeight(calculateHeightMeters(ballRef.current.position.y, canvasHeight, pixelsPerMeter));
+
     return () => {
       if (animationRef.current) cancelAnimationFrame(animationRef.current);
     };
-  }, [resetKey]);
+  }, [resetKey, canvasHeight, canvasWidth, pixelsPerMeter]);
 
   const animate = useCallback(() => {
     const canvas = canvasRef.current;
@@ -218,8 +225,8 @@ const SerbestDusmeSimulation = ({ resetKey = 0, onDataUpdate }) => {
     if (ballRef.current) {
       const ball = ballRef.current;
       
-      // Doğru fizik hesaplamaları
-      const currentHeight = calculateHeightMeters(ball.position.y);
+      // Fizik hesaplamaları
+      const currentHeight = calculateHeightMeters(ball.position.y, canvasHeight, pixelsPerMeter);
       const currentVelocity = Math.abs(ball.velocity.y) / pixelsPerMeter;
 
       setMaxInfo(prev => ({
@@ -231,37 +238,36 @@ const SerbestDusmeSimulation = ({ resetKey = 0, onDataUpdate }) => {
       if (onDataUpdate) onDataUpdate({ height: currentHeight, velocity: currentVelocity });
 
       if (isSimulationRunning) {
-          if (simulationTimeRef.current - lastChartUpdateTimeRef.current > 0.05) {
-              const currentTime = simulationTimeRef.current.toFixed(2);
-              const chartedHeight = currentHeight < 0.01 ? 0 : currentHeight;
-              
-              setHeightChartData(prevData => ({
-                  ...prevData,
-                  labels: [...prevData.labels, currentTime].slice(-maxDataPoints),
-                  datasets: [{
-                    ...prevData.datasets[0],
-                    data: [...prevData.datasets[0].data, chartedHeight].slice(-maxDataPoints)
-                  }]
-              }));
-              setVelocityChartData(prevData => ({
-                  ...prevData,
-                  labels: [...prevData.labels, currentTime].slice(-maxDataPoints),
-                  datasets: [{
-                    ...prevData.datasets[0],
-                    data: [...prevData.datasets[0].data, currentVelocity].slice(-maxDataPoints),
-                    borderColor: '#f44336'
-                  }]
-              }));
-              lastChartUpdateTimeRef.current = simulationTimeRef.current;
-          }
+        if (simulationTimeRef.current - lastChartUpdateTimeRef.current > 0.05) {
+          const currentTime = simulationTimeRef.current.toFixed(2);
+          const chartedHeight = currentHeight < 0.01 ? 0 : currentHeight;
           
-          // Otomatik durdurma mantığı
-          const isGrounded = currentHeight < 0.01;
-          const hasStoppedBouncing = Math.abs(ball.velocity.y) < 0.5 * pixelsPerMeter;
-
-          if (isGrounded && hasStoppedBouncing) {
-            stopSimulation();
-          }
+          setHeightChartData(prevData => ({
+            ...prevData,
+            labels: [...prevData.labels, currentTime].slice(-maxDataPoints),
+            datasets: [{
+              ...prevData.datasets[0],
+              data: [...prevData.datasets[0].data, chartedHeight].slice(-maxDataPoints)
+            }]
+          }));
+          setVelocityChartData(prevData => ({
+            ...prevData,
+            labels: [...prevData.labels, currentTime].slice(-maxDataPoints),
+            datasets: [{
+              ...prevData.datasets[0],
+              data: [...prevData.datasets[0].data, currentVelocity].slice(-maxDataPoints),
+              borderColor: '#f44336'
+            }]
+          }));
+          lastChartUpdateTimeRef.current = simulationTimeRef.current;
+        }
+        
+        // Otomatik durdurma
+        const isGrounded = currentHeight < 0.01;
+        const hasStoppedBouncing = Math.abs(ball.velocity.y) < 0.5 * pixelsPerMeter;
+        if (isGrounded && hasStoppedBouncing) {
+          stopSimulation();
+        }
       }
       
       ctx.fillStyle = isDragging ? '#0078ff' : '#ff4444';
@@ -271,7 +277,16 @@ const SerbestDusmeSimulation = ({ resetKey = 0, onDataUpdate }) => {
     }
 
     animationRef.current = requestAnimationFrame(animate);
-  }, [isSimulationRunning, isDragging, onDataUpdate, stopSimulation]);
+  }, [
+    isSimulationRunning,
+    isDragging,
+    onDataUpdate,
+    stopSimulation,
+    canvasWidth,
+    canvasHeight,
+    pixelsPerMeter,
+    maxDataPoints
+  ]);
 
   useEffect(() => {
     animationRef.current = requestAnimationFrame(animate);
@@ -301,21 +316,21 @@ const SerbestDusmeSimulation = ({ resetKey = 0, onDataUpdate }) => {
     Matter.Body.setPosition(ballRef.current, { x: newX, y: newY });
     Matter.Body.setVelocity(ballRef.current, { x: 0, y: 0 });
     setBallPosition({ x: newX, y: newY });
-    setInitialHeight(calculateHeightMeters(newY));
-  }, [isDragging]);
+    setInitialHeight(calculateHeightMeters(newY, canvasHeight, pixelsPerMeter));
+  }, [isDragging, canvasWidth, canvasHeight, pixelsPerMeter]);
 
   const handleMouseUp = useCallback(() => {
     if (isDragging) {
       setIsDragging(false);
       if(ballRef.current) {
-        setInitialHeight(calculateHeightMeters(ballRef.current.position.y));
+        setInitialHeight(calculateHeightMeters(ballRef.current.position.y, canvasHeight, pixelsPerMeter));
       }
     }
-  }, [isDragging]);
+  }, [isDragging, canvasHeight, pixelsPerMeter]);
 
-  const startSimulation = () => {
+  const startSimulation = useCallback(() => {
     if (ballRef.current) {
-      setInitialHeight(calculateHeightMeters(ballRef.current.position.y));
+      setInitialHeight(calculateHeightMeters(ballRef.current.position.y, canvasHeight, pixelsPerMeter));
       Matter.Body.setVelocity(ballRef.current, { x: 0, y: 0 });
     }
     setMaxInfo({ maxHeight: 0, maxVelocity: 0 });
@@ -332,9 +347,9 @@ const SerbestDusmeSimulation = ({ resetKey = 0, onDataUpdate }) => {
       datasets: [{ ...initialChartData.datasets[0], data: [], borderColor: '#f44336' }]
     });
     setIsSimulationRunning(true);
-  };
+  }, [canvasHeight, pixelsPerMeter]);
 
-  const resetSimulation = () => {
+  const resetSimulation = useCallback(() => {
     setIsSimulationRunning(false);
     setIsDragging(false);
     const initialPos = { x: 300, y: 50 };
@@ -346,7 +361,14 @@ const SerbestDusmeSimulation = ({ resetKey = 0, onDataUpdate }) => {
       Matter.Body.setPosition(ballRef.current, initialPos);
       Matter.Body.setVelocity(ballRef.current, { x: 0, y: 0 });
     }
-    setInitialHeight(calculateHeightMeters(initialPos.y));
+
+    // calculateHeightMeters'i burada inline hesaplıyoruz ki dependency şişmesin
+    const groundTop = canvasHeight - 40;
+    const ballBottom = initialPos.y + 20;
+    const heightInPixels = Math.max(0, groundTop - ballBottom);
+    const h = heightInPixels / pixelsPerMeter;
+    setInitialHeight(h);
+
     simulationTimeRef.current = 0;
     lastChartUpdateTimeRef.current = 0;
     setHeightChartData({
@@ -359,9 +381,9 @@ const SerbestDusmeSimulation = ({ resetKey = 0, onDataUpdate }) => {
       labels: [],
       datasets: [{ ...initialChartData.datasets[0], data: [], borderColor: '#f44336' }]
     });
-  };
+  }, [canvasHeight, pixelsPerMeter]);
   
-  useEffect(() => { resetSimulation(); }, [resetKey]);
+  useEffect(() => { resetSimulation(); }, [resetKey, resetSimulation]);
 
   const chartOptions = (title, yAxisLabel) => ({
     responsive: true,
@@ -377,7 +399,7 @@ const SerbestDusmeSimulation = ({ resetKey = 0, onDataUpdate }) => {
     animation: false,
   });
   
-  // Teorik maksimum hız hesaplama (v = √(2gh))
+  // Teorik maksimum hız (v = √(2gh))
   const theoreticalMaxVelocity = initialHeight > 0 ? Math.sqrt(2 * 9.81 * initialHeight) : 0;
   
   return (
@@ -523,4 +545,4 @@ const SerbestDusmeSimulation = ({ resetKey = 0, onDataUpdate }) => {
   );
 };
 
-export default SerbestDusmeSimulation;
+export { default } from './SerbestDusmeSimulation';
