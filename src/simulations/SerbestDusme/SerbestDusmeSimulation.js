@@ -1,6 +1,3 @@
-// =============================
-// File: src/simulations/SerbestDusme/SerbestDusmeSimulation.js
-// =============================
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { Line } from 'react-chartjs-2';
 import {
@@ -159,7 +156,6 @@ const SerbestDusmeSimulation = ({ resetKey = 0, onDataUpdate }) => {
 
   const [isSimulationRunning, setIsSimulationRunning] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
-  const [ballPosition, setBallPosition] = useState({ x: 300, y: 50 });
   const [initialHeight, setInitialHeight] = useState(0);
   const [info, setInfo] = useState({ height: 0, velocity: 0 });
   const [maxInfo, setMaxInfo] = useState({ maxHeight: 0, maxVelocity: 0 });
@@ -174,7 +170,7 @@ const SerbestDusmeSimulation = ({ resetKey = 0, onDataUpdate }) => {
 
   const stopSimulation = useCallback(() => setIsSimulationRunning(false), []);
 
-  // Engine + Body kurulumu — ballPosition'a BAĞLI DEĞİL (CI hatasını engellemek için)
+  // Engine + Body kurulumu
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -315,7 +311,6 @@ const SerbestDusmeSimulation = ({ resetKey = 0, onDataUpdate }) => {
     const newY = Math.max(20, Math.min(mouseY, canvasHeight - 60));
     Matter.Body.setPosition(ballRef.current, { x: newX, y: newY });
     Matter.Body.setVelocity(ballRef.current, { x: 0, y: 0 });
-    setBallPosition({ x: newX, y: newY });
     setInitialHeight(calculateHeightMeters(newY, canvasHeight, pixelsPerMeter));
   }, [isDragging, canvasWidth, canvasHeight, pixelsPerMeter]);
 
@@ -353,7 +348,6 @@ const SerbestDusmeSimulation = ({ resetKey = 0, onDataUpdate }) => {
     setIsSimulationRunning(false);
     setIsDragging(false);
     const initialPos = { x: 300, y: 50 };
-    setBallPosition(initialPos);
     setInfo({ height: 0, velocity: 0 });
     setMaxInfo({ maxHeight: 0, maxVelocity: 0 });
 
@@ -545,4 +539,4 @@ const SerbestDusmeSimulation = ({ resetKey = 0, onDataUpdate }) => {
   );
 };
 
-export { default } from './SerbestDusmeSimulation';
+export default SerbestDusmeSimulation;
