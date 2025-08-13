@@ -179,7 +179,7 @@ const YatayAtisSimulation = ({ resetKey = 0 }) => {
     setHeightChartData({ ...initialChartData, labels: [], datasets: [{...initialChartData.datasets[0], data:[]}] });
     setVelocityChartData({ ...initialChartData, labels: [], datasets: [{...initialChartData.datasets[0], data:[], label: 'Dikey Hız', borderColor: '#f44336'}] });
 
-  }, [height, initialVelocityX, pixelsPerMeter, canvasWidth, canvasHeight, theoreticalMaxDistance]);
+  }, [height, pixelsPerMeter, canvasWidth, canvasHeight, theoreticalMaxDistance]);
 
   useEffect(() => {
     resetSimulation();
@@ -270,6 +270,7 @@ const YatayAtisSimulation = ({ resetKey = 0 }) => {
   }, [animate]);
 
   const startSimulation = useCallback(() => {
+    resetSimulation(false); // Tam resetlemeden sadece pozisyonları ayarla
     setIsSimulationRunning(true);
     if (ballRef.current) {
       Matter.Body.setVelocity(ballRef.current, { 
@@ -277,7 +278,8 @@ const YatayAtisSimulation = ({ resetKey = 0 }) => {
         y: 0 
       });
     }
-  }, [initialVelocityX, pixelsPerMeter]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialVelocityX, pixelsPerMeter, resetSimulation]);
 
   const handleMouseDown = useCallback((e) => {
     if (isSimulationRunning) return;
