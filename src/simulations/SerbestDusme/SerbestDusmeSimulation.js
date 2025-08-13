@@ -26,7 +26,7 @@ ChartJS.register(
 const Matter = {
   Engine: {
     create: () => ({
-      world: { bodies: [], gravity: { x: 0, y: 9.81 } }, // Doğru yerçekimi değeri
+      world: { bodies: [], gravity: { x: 0, y: 10 } }, // Doğru yerçekimi değeri
       timing: { timeScale: 1 },
       deltaTime: 1 / 60 // 60 FPS
     }),
@@ -234,7 +234,7 @@ const SerbestDusmeSimulation = ({ resetKey = 0, onDataUpdate }) => {
       if (onDataUpdate) onDataUpdate({ height: currentHeight, velocity: currentVelocity });
 
       if (isSimulationRunning) {
-        if (simulationTimeRef.current - lastChartUpdateTimeRef.current > 0.05) {
+        if (simulationTimeRef.current - lastChartUpdateTimeRef.current > 0.016) {
           const currentTime = simulationTimeRef.current.toFixed(2);
           const chartedHeight = currentHeight < 0.01 ? 0 : currentHeight;
           
@@ -394,7 +394,7 @@ const SerbestDusmeSimulation = ({ resetKey = 0, onDataUpdate }) => {
   });
   
   // Teorik maksimum hız (v = √(2gh))
-  const theoreticalMaxVelocity = initialHeight > 0 ? Math.sqrt(2 * 9.81 * initialHeight) : 0;
+  const theoreticalMaxVelocity = initialHeight > 0 ? Math.sqrt(2 * 10 * initialHeight) : 0;
   
   return (
     <div className="simulation-container">
@@ -504,7 +504,7 @@ const SerbestDusmeSimulation = ({ resetKey = 0, onDataUpdate }) => {
           <div>
             <p style={{ margin: '4px 0' }}><b>Başlangıç Yüksekliği:</b> {initialHeight.toFixed(2)} m</p>
             <p style={{ margin: '4px 0' }}><b>Teorik Max Hız:</b> {theoreticalMaxVelocity.toFixed(2)} m/s</p>
-            <p style={{ margin: '4px 0' }}><b>Yerçekimi:</b> g = 9.81 m/s²</p>
+            <p style={{ margin: '4px 0' }}><b>Yerçekimi:</b> g = 10 m/s²</p>
           </div>
         </div>
       </div>
