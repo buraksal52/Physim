@@ -4,6 +4,7 @@ import './Sidebar.css';
 
 const simulations = [
   { name: 'Serbest Düşme', path: 'serbest-dusme' },
+  { name: 'Yatay Atış', path: 'yatay-atis' },
   // Yeni simülasyonlar buraya eklenecek
   // { name: 'Eğik Atış', path: 'egik-atis' },
 ];
