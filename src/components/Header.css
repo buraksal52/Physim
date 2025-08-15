@@ -1,7 +1,7 @@
 .header {
-  background-color: #fff;
+  background-color: #101830;
   padding: 0 24px;
-  border-bottom: 1px solid #e8e8e8;
+  border-bottom: 1px solid #6FFFE9;
   height: 64px;
   display: flex;
   align-items: center;
@@ -9,6 +9,8 @@
 
 .header h1 {
   margin: 0;
-  font-size: 20px;
-  font-weight: 500;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #F5F5F5;
 }
