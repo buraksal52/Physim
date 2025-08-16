@@ -11,6 +11,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import './YatayAtis.css';
 
 ChartJS.register(
   CategoryScale,
@@ -340,7 +341,7 @@ const YatayAtisSimulation = ({ resetKey = 0 }) => {
         <h3>Yatay Atış Simülasyonu</h3>
         <div className="simulation-controls" style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
             <div style={{display: 'flex', gap: '20px'}}>
-                <div className="input-group" style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
+                <div className="input-group" style={{display: 'flex', alignItems: 'center', gap: '10px', color: 'white'}}>
                     <label htmlFor="height_input">Yükseklik (h):</label>
                     <input 
                         id="height_input"
@@ -352,7 +353,7 @@ const YatayAtisSimulation = ({ resetKey = 0 }) => {
                     />
                     <span>m</span>
                 </div>
-                <div className="input-group" style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
+                <div className="input-group" style={{display: 'flex', alignItems: 'center', gap: '10px', color: 'white'}}>
                     <label htmlFor="velocity_input">Atış Hızı (v₀):</label>
                     <input 
                         id="velocity_input"
