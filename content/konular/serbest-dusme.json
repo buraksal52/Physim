@@ -1,0 +1,56 @@
+{
+  "id": "serbest-dusme",
+  "slug": "serbest-dusme",
+  "baslik": "Serbest Düşme",
+  "ozet": "Yalnızca yerçekimi etkisiyle düşen cisimlerin hareketi.",
+  "analatim": "Serbest düşme, bir cismin yalnızca yerçekimi ivmesi (g = 9.8 m/s²) etkisiyle hareketi olarak tanımlanır. Hava sürtünmesi ihmal edildiğinde, tüm cisimler kütlelerinden bağımsız olarak aynı ivme ile düşer. Bu kavram ilk olarak Galileo Galilei tarafından ortaya konmuştur.\n\nSerbest düşmede cisim başlangıçta durgun haldedir (v₀ = 0). Yerçekimi kuvveti cisme sabit bir ivme kazandırır. Bu ivme yeryüzüne yakın bölgelerde yaklaşık olarak g = 9.8 m/s² (veya hesap kolaylığı için g = 10 m/s²) olarak alınır.\n\nSerbest düşme hareketi düzgün ivmelenen bir harekettir. Yani hız zamanla doğru orantılı olarak artar, alınan yol ise zamanın karesi ile orantılı olarak artar.",
+  "formuller": [
+    { "label": "Hız", "latex": "v = g \\cdot t" },
+    { "label": "Yol", "latex": "h = \\frac{1}{2} g t^2" },
+    { "label": "Hız-Yol", "latex": "v^2 = 2gh" }
+  ],
+  "sorular": [
+    {
+      "id": 1,
+      "soru": "10 m yüksekten bırakılan cisim kaç saniyede yere çarpar? (g = 10 m/s²)",
+      "secenekler": ["1 s", "1.4 s", "2 s", "2.8 s"],
+      "dogru": 1,
+      "cozum_adimlari": [
+        "h = ½ · g · t² formülünü kullanıyoruz.",
+        "10 = ½ · 10 · t²",
+        "t² = 2",
+        "t ≈ 1.41 s"
+      ]
+    },
+    {
+      "id": 2,
+      "soru": "Serbest düşen bir cismin 3. saniyedeki hızı nedir? (g = 10 m/s²)",
+      "secenekler": ["10 m/s", "20 m/s", "30 m/s", "40 m/s"],
+      "dogru": 2,
+      "cozum_adimlari": [
+        "v = g · t formülünü kullanıyoruz.",
+        "v = 10 · 3",
+        "v = 30 m/s"
+      ]
+    },
+    {
+      "id": 3,
+      "soru": "Serbest düşen bir cismin ilk 2 saniyede aldığı yol nedir? (g = 10 m/s²)",
+      "secenekler": ["10 m", "20 m", "30 m", "40 m"],
+      "dogru": 1,
+      "cozum_adimlari": [
+        "h = ½ · g · t² formülünü kullanıyoruz.",
+        "h = ½ · 10 · 4",
+        "h = 20 m"
+      ]
+    }
+  ],
+  "simulasyon": {
+    "tip": "serbest-dusme",
+    "zorunlu_deney": {
+      "aciklama": "Yüksekliği 40 m olarak ayarla ve düşme süresini gözlemle.",
+      "hedef_degisken": "sure",
+      "hedef_aralik": { "min": 2.8, "max": 2.9 }
+    }
+  }
+}

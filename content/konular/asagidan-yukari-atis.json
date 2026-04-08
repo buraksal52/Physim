@@ -1,0 +1,57 @@
+{
+  "id": "asagidan-yukari-atis",
+  "slug": "asagidan-yukari-atis",
+  "baslik": "Aşağıdan Yukarı Atış",
+  "ozet": "Yukarı doğru atılan cisimlerin çıkış, zirve ve dönüş hareketinin analizi.",
+  "analatim": "Aşağıdan yukarı atılan cisim, yerçekimi ivmesinin etkisiyle yavaşlar, zirveye ulaşır ve geri düşer...",
+  "formuller": [
+    { "label": "Hız", "latex": "v = v_0 - g \\cdot t" },
+    { "label": "Konum", "latex": "y = v_0 t - \\frac{1}{2} g t^2" },
+    { "label": "Zirve yüksekliği", "latex": "h_{max} = \\frac{v_0^2}{2g}" },
+    { "label": "Zirve süresi", "latex": "t_{zirve} = \\frac{v_0}{g}" },
+    { "label": "Toplam süre", "latex": "T = \\frac{2v_0}{g}" }
+  ],
+  "sorular": [
+    {
+      "id": 1,
+      "soru": "20 m/s ile yukarı atılan cismin ulaşacağı maksimum yükseklik nedir? (g = 10 m/s²)",
+      "secenekler": ["10 m", "20 m", "30 m", "40 m"],
+      "dogru": 1,
+      "cozum_adimlari": [
+        "h_max = v₀² / 2g formülünü kullanıyoruz.",
+        "h_max = 20² / (2·10)",
+        "h_max = 400 / 20 = 20 m"
+      ]
+    },
+    {
+      "id": 2,
+      "soru": "30 m/s ile yukarı atılan cismin zirveye ulaşma süresi nedir? (g = 10 m/s²)",
+      "secenekler": ["1 s", "2 s", "3 s", "4 s"],
+      "dogru": 2,
+      "cozum_adimlari": [
+        "t_zirve = v₀ / g formülünü kullanıyoruz.",
+        "t_zirve = 30 / 10",
+        "t_zirve = 3 s"
+      ]
+    },
+    {
+      "id": 3,
+      "soru": "Yukarı atılan cismin zirvede hızı kaçtır?",
+      "secenekler": ["v₀'a eşittir", "v₀/2'ye eşittir", "Sıfırdır", "g'ye eşittir"],
+      "dogru": 2,
+      "cozum_adimlari": [
+        "Zirve noktasında cisim anlık olarak durur.",
+        "v = v₀ - g·t formülünde t = v₀/g koyulursa v = 0 çıkar.",
+        "Zirvede hız her zaman sıfırdır."
+      ]
+    }
+  ],
+  "simulasyon": {
+    "tip": "asagidan-yukari-atis",
+    "zorunlu_deney": {
+      "aciklama": "Başlangıç hızını 25 m/s olarak ayarla ve zirve yüksekliğini gözlemle.",
+      "hedef_degisken": "zirve",
+      "hedef_aralik": { "min": 31, "max": 32 }
+    }
+  }
+}

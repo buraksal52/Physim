@@ -1,0 +1,60 @@
+{
+  "id": "yukaridan-asagi-atis",
+  "slug": "yukaridan-asagi-atis",
+  "baslik": "Yukarıdan Aşağıya Atış",
+  "ozet": "Belirli bir yükseklikten aşağı doğru başlangıç hızıyla atılan cisimlerin hareketi.",
+  "analatim": "Yukarıdan aşağıya atışta cisim hem başlangıç hızına hem de yerçekimi ivmesine sahiptir. İki etki aynı yönde olduğu için cisim serbest düşmeden daha hızlı yere ulaşır...",
+  "formuller": [
+    { "label": "Hız", "latex": "v = v_0 + g \\cdot t" },
+    { "label": "Konum", "latex": "y = v_0 t + \\frac{1}{2} g t^2" },
+    { "label": "Hız-Yol", "latex": "v^2 = v_0^2 + 2gh" }
+  ],
+  "sorular": [
+    {
+      "id": 1,
+      "soru": "5 m/s başlangıç hızıyla 20 m yüksekten aşağı atılan cismin yere çarpma hızı nedir? (g = 10 m/s²)",
+      "secenekler": ["15 m/s", "20 m/s", "25 m/s", "30 m/s"],
+      "dogru": 2,
+      "cozum_adimlari": [
+        "v² = v₀² + 2gh formülünü kullanıyoruz.",
+        "v² = 5² + 2·10·20 = 25 + 400 = 425",
+        "v ≈ 20.6 m/s ≈ 20 m/s"
+      ]
+    },
+    {
+      "id": 2,
+      "soru": "Aynı yüksekten biri serbest, diğeri aşağı doğru atılarak bırakılan iki cisim için hangisi önce yere çarpar?",
+      "secenekler": [
+        "Serbest bırakılan",
+        "Aşağı atılan",
+        "Aynı anda çarpar",
+        "Kütleye göre değişir"
+      ],
+      "dogru": 1,
+      "cozum_adimlari": [
+        "Aşağı atılan cismin başlangıç hızı v₀ > 0'dır.",
+        "Serbest bırakılan cismin başlangıç hızı 0'dır.",
+        "Aynı yükseklikte daha yüksek başlangıç hızı daha kısa sürede yere ulaştırır."
+      ]
+    },
+    {
+      "id": 3,
+      "soru": "10 m/s ile aşağı atılan cisim 3 saniyede yere çarpıyorsa düşme yüksekliği nedir? (g = 10 m/s²)",
+      "secenekler": ["30 m", "45 m", "60 m", "75 m"],
+      "dogru": 2,
+      "cozum_adimlari": [
+        "y = v₀t + ½gt² formülünü kullanıyoruz.",
+        "y = 10·3 + ½·10·9",
+        "y = 30 + 45 = 75 m"
+      ]
+    }
+  ],
+  "simulasyon": {
+    "tip": "yukaridan-asagi-atis",
+    "zorunlu_deney": {
+      "aciklama": "Yüksekliği 45 m, başlangıç hızını 10 m/s olarak ayarla ve yere çarpma süresini gözlemle.",
+      "hedef_degisken": "sure",
+      "hedef_aralik": { "min": 2.4, "max": 2.6 }
+    }
+  }
+}

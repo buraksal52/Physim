@@ -1,0 +1,8 @@
+[
+  { "slug": "serbest-dusme", "unlocks": "yatay-atis" },
+  { "slug": "yatay-atis", "unlocks": "asagidan-yukari-atis" },
+  { "slug": "asagidan-yukari-atis", "unlocks": "yukaridan-asagi-atis" },
+  { "slug": "yukaridan-asagi-atis", "unlocks": "egik-atis" },
+  { "slug": "egik-atis", "unlocks": "newton-1-yasa" },
+  { "slug": "newton-1-yasa", "unlocks": null }
+]

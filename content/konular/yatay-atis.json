@@ -1,0 +1,55 @@
+{
+  "id": "yatay-atis",
+  "slug": "yatay-atis",
+  "baslik": "Yatay Atış",
+  "ozet": "Yatay atılan cisimlerin yatay ve düşey hareketlerinin bağımsız analizi.",
+  "analatim": "Yatay atışta cisim, yatayda sabit hızla hareket ederken düşeyde serbest düşme yapar...",
+  "formuller": [
+    { "label": "Yatay konum", "latex": "x = v_0 \\cdot t" },
+    { "label": "Düşey konum", "latex": "y = \\frac{1}{2} g t^2" },
+    { "label": "Düşme süresi", "latex": "t = \\sqrt{\\frac{2h}{g}}" },
+    { "label": "Menzil", "latex": "x_{max} = v_0 \\cdot \\sqrt{\\frac{2h}{g}}" }
+  ],
+  "sorular": [
+    {
+      "id": 1,
+      "soru": "20 m yüksekten 10 m/s yatay hızla atılan cismin menzili nedir? (g = 10 m/s²)",
+      "secenekler": ["10 m", "20 m", "30 m", "40 m"],
+      "dogru": 1,
+      "cozum_adimlari": [
+        "Önce düşme süresini buluyoruz: t = √(2h/g)",
+        "t = √(2·20/10) = √4 = 2 s",
+        "Menzil: x = v₀ · t = 10 · 2 = 20 m"
+      ]
+    },
+    {
+      "id": 2,
+      "soru": "Yatay atışta yatay hız bileşeni için ne söylenebilir?",
+      "secenekler": ["Sürekli artar", "Sürekli azalır", "Sabit kalır", "Önce artar sonra azalır"],
+      "dogru": 2,
+      "cozum_adimlari": [
+        "Yatay yönde hiçbir kuvvet yoktur.",
+        "Newton'un 1. yasasına göre hız sabit kalır.",
+        "Yatay hız bileşeni her zaman v₀'a eşittir."
+      ]
+    },
+    {
+      "id": 3,
+      "soru": "45 m yüksekten atılan cisim 3 saniyede yere çarpıyorsa yatay hızı nedir? (g = 10 m/s²)",
+      "secenekler": ["10 m/s", "15 m/s", "20 m/s", "25 m/s"],
+      "dogru": 1,
+      "cozum_adimlari": [
+        "h = ½ · g · t² → 45 = ½ · 10 · t² → t = 3 s (doğrulanıyor)",
+        "Menzil 45 m verildiğinde: v₀ = x/t = 45/3 = 15 m/s"
+      ]
+    }
+  ],
+  "simulasyon": {
+    "tip": "yatay-atis",
+    "zorunlu_deney": {
+      "aciklama": "Yüksekliği 20 m, yatay hızı 15 m/s olarak ayarla ve menzili gözlemle.",
+      "hedef_degisken": "menzil",
+      "hedef_aralik": { "min": 29, "max": 31 }
+    }
+  }
+}
