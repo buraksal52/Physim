@@ -754,3 +754,219 @@ function AngledThrowSimulation({
     </div>
   );
 }
+
+/* ─── Newton's 1st Law Simulation ─── */
+function Newton1Simulation({
+  slug,
+  simulasyon,
+}: SimulationWrapperProps) {
+  const [v0, setV0] = useState(30);
+  const [friction, setFriction] = useState(0);
+  const [isRunning, setIsRunning] = useState(false);
+  const [isFinished, setIsFinished] = useState(false);
+  
+  const [currentX, setCurrentX] = useState(0);
+  const [currentV, setCurrentV] = useState(v0);
+  const [elapsedTime, setElapsedTime] = useState(0);
+  
+  const animFrameRef = useRef<number | null>(null);
+  const startTimeRef = useRef<number>(0);
+
+  const handleStart = useCallback(() => {
+    if (isRunning) return;
+
+    setIsRunning(true);
+    setIsFinished(false);
+    setCurrentX(0);
+    setCurrentV(v0);
+    setElapsedTime(0);
+
+    startTimeRef.current = performance.now();
+
+    const animate = (now: number) => {
+      const rawElapsed = (now - startTimeRef.current) / 1000;
+      const elapsed = rawElapsed * TIME_SCALE;
+      
+      const { x, v } = getNewton1Position(v0, friction, elapsed);
+      
+      const maxDistance = 600; 
+      if (v <= 0 || elapsed >= 5 || x > maxDistance) {
+        setCurrentX(x);
+        setCurrentV(v);
+        setElapsedTime(Math.min(elapsed, 5));
+        setIsRunning(false);
+        setIsFinished(true);
+        return;
+      }
+
+      setCurrentX(x);
+      setCurrentV(v);
+      setElapsedTime(elapsed);
+
+      animFrameRef.current = requestAnimationFrame(animate);
+    };
+
+    animFrameRef.current = requestAnimationFrame(animate);
+  }, [isRunning, v0, friction]);
+
+  const handleReset = useCallback(() => {
+    if (animFrameRef.current !== null) {
+      cancelAnimationFrame(animFrameRef.current);
+      animFrameRef.current = null;
+    }
+    setIsRunning(false);
+    setIsFinished(false);
+    setCurrentX(0);
+    setCurrentV(v0);
+    setElapsedTime(0);
+  }, [v0]);
+
+
+  return (
+    <div className="space-y-6">
+      <div className="flex flex-col gap-6">
+        <div className="relative w-full max-w-[600px] h-[200px] bg-white mx-auto rounded overflow-hidden shadow-inner border border-gray-200">
+          <div className="absolute inset-x-0 bottom-0 h-4 bg-[#e5e7eb] border-t-2 border-[#e5e7eb]" />
+          <div
+            className="absolute bottom-4 w-12 h-12 bg-[#2563eb] rounded-sm shadow-md flex items-center justify-center text-xs font-bold text-white transition-none"
+            style={{ left: `calc(${(currentX / 250) * 100}% - ${(currentX / 250) * 3}rem)` }}
+          >
+            Blok
+            {/* Speed readout */}
+            <div className="absolute -top-6 whitespace-nowrap text-xs font-medium text-[#18181b]">
+              v = {currentV.toFixed(1)} m/s
+            </div>
+            {/* Velocity Indicator Arrow */}
+            {currentV > 0 && (
+              <div 
+                className="absolute left-full top-1/2 -translate-y-1/2 h-0.5 bg-[#2563eb]"
+                style={{ width: `${currentV}px` }}
+              >
+                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 border-t-2 border-r-2 border-[#2563eb] rotate-45 transform translate-x-px" />
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-2">
+          <div className="flex flex-col gap-4 rounded-xl border border-zinc-200 bg-white p-5">
+            <h4 className="text-sm font-semibold uppercase tracking-wide text-zinc-500">
+              Kontrol Paneli
+            </h4>
+            
+            <div className="space-y-4">
+              <div>
+                <label className="flex justify-between text-sm font-medium text-zinc-700 mb-2">
+                  <span>Başlangıç Hızı (m/s)</span>
+                  <span className="font-semibold text-blue-600">{v0.toFixed(1)}</span>
+                </label>
+                <input
+                  type="range"
+                  min="5"
+                  max="50"
+                  step="1"
+                  value={v0}
+                  onChange={(e) => { setV0(Number(e.target.value)); setCurrentV(Number(e.target.value)); }}
+                  className="w-full accent-blue-600"
+                  disabled={isRunning}
+                />
+              </div>
+
+              <div>
+                <label className="flex justify-between text-sm font-medium text-zinc-700 mb-2">
+                  <span>Sürtünme Katsayısı</span>
+                  <span className="font-semibold text-blue-600">{friction.toFixed(1)}</span>
+                </label>
+                <input
+                  type="range"
+                  min="0"
+                  max="1.0"
+                  step="0.1"
+                  value={friction}
+                  onChange={(e) => setFriction(Number(e.target.value))}
+                  className="w-full accent-blue-600"
+                  disabled={isRunning}
+                />
+              </div>
+            </div>
+
+            <div className="flex gap-3 mt-2">
+              <button
+                onClick={handleStart}
+                disabled={isRunning}
+                className="flex-1 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Başlat
+              </button>
+              <button
+                onClick={handleReset}
+                disabled={isRunning && !isFinished}
+                className="flex-1 rounded-lg border border-zinc-300 px-4 py-2.5 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-50 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Sıfırla
+              </button>
+            </div>
+          </div>
+
+          <div className="rounded-xl border border-zinc-200 bg-white p-5">
+            <h4 className="text-sm font-semibold uppercase tracking-wide text-zinc-500 mb-4">
+              Gözlem Paneli
+            </h4>
+            <div className="grid grid-cols-2 gap-3">
+              <div
+                className={`col-span-1 rounded-lg border px-4 py-3 transition-colors ${
+                  isRunning ? "border-blue-200 bg-blue-50" : "border-zinc-100 bg-zinc-50"
+                }`}
+              >
+                <p className="text-xs text-zinc-500">Geçen Süre (t)</p>
+                <p
+                  className={`mt-1 font-mono text-lg font-semibold ${
+                    isRunning ? "text-blue-700" : "text-zinc-900"
+                  }`}
+                >
+                  {elapsedTime.toFixed(2)} s
+                </p>
+              </div>
+
+              <div
+                className={`col-span-1 rounded-lg border px-4 py-3 transition-colors ${
+                  isRunning ? "border-blue-200 bg-blue-50" : "border-zinc-100 bg-zinc-50"
+                }`}
+              >
+                <p className="text-xs text-zinc-500">Konum (x)</p>
+                <p
+                  className={`mt-1 font-mono text-lg font-semibold ${
+                    isRunning ? "text-blue-700" : "text-zinc-900"
+                  }`}
+                >
+                  {currentX.toFixed(1)} m
+                </p>
+              </div>
+
+              <div
+                className={`col-span-2 rounded-lg border px-4 py-3 transition-colors ${
+                  isRunning ? "border-blue-200 bg-blue-50" : "border-zinc-100 bg-zinc-50"
+                }`}
+              >
+                <p className="text-xs text-zinc-500">Anlık Hız (v)</p>
+                <p
+                  className={`mt-1 font-mono text-lg font-semibold ${
+                    isRunning ? "text-blue-700" : "text-zinc-900"
+                  }`}
+                >
+                  {currentV.toFixed(1)} m/s
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <CompletionCheck
+        slug={slug}
+        zorunluDeney={simulasyon.zorunlu_deney}
+        observedValue={isFinished && elapsedTime >= 5 ? currentV : 0}
+        isFinished={isFinished && elapsedTime >= 5}
+      />
+    </div>
+  );
+}
