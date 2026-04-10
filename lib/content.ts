@@ -8,6 +8,14 @@ const CONTENT_DIR = path.join(process.cwd(), "content", "konular");
  * Get all topic slugs for static generation.
  */
 export function getAllTopicSlugs(): string[] {
+  const sequencePath = path.join(process.cwd(), "content", "konular-sirasi.json");
+  if (fs.existsSync(sequencePath)) {
+    const raw = fs.readFileSync(sequencePath, "utf-8");
+    const sequence = JSON.parse(raw) as { slug: string; unlocks: string | null }[];
+    return sequence.map((item) => item.slug);
+  }
+  
+  // Fallback to file reading if sirasi is missing
   const files = fs.readdirSync(CONTENT_DIR);
   return files
     .filter((f) => f.endsWith(".json"))

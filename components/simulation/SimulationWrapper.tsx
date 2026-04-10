@@ -42,6 +42,7 @@ import AngledThrowCanvas from "./AngledThrowCanvas";
 import AngledThrowControlPanel from "./AngledThrowControlPanel";
 import AngledThrowObservationPanel from "./AngledThrowObservationPanel";
 import CompletionCheck from "./CompletionCheck";
+import VectorCanvas from "./VectorCanvas";
 
 interface SimulationWrapperProps {
   slug: string;
@@ -81,6 +82,10 @@ export default function SimulationWrapper({
 
   if (simulasyon.tip === "newton-3") {
     return <Newton3Simulation slug={slug} simulasyon={simulasyon} />;
+  }
+
+  if (simulasyon.tip === "vektorler") {
+    return <VectorCanvas slug={slug} simulasyon={simulasyon} />;
   }
 
   return <FreeFallSimulation slug={slug} simulasyon={simulasyon} />;

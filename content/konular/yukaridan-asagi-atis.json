@@ -54,7 +54,7 @@
     "zorunlu_deney": {
       "aciklama": "Yüksekliği 45 m, başlangıç hızını 10 m/s olarak ayarla ve yere çarpma süresini gözlemle.",
       "hedef_degisken": "sure",
-      "hedef_aralik": { "min": 2.4, "max": 2.6 }
+      "hedef_aralik": { "min": 2.1, "max": 2.3 }
     }
   }
 }
