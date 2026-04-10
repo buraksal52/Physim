@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { Simulasyon } from "@/lib/types";
 import {
   calculateFreeFall,
@@ -24,6 +24,8 @@ import {
   getAngledThrowPosition,
 } from "@/lib/physics/angledThrow";
 import { getNewton1Position } from "@/lib/physics/newton1";
+import { getNewton2Position } from "@/lib/physics/newton2";
+import { calculateCollision, getImpactForce } from "@/lib/physics/newton3";
 import ControlPanel from "./ControlPanel";
 import SimulationCanvas from "./SimulationCanvas";
 import ObservationPanel from "./ObservationPanel";
@@ -71,6 +73,14 @@ export default function SimulationWrapper({
 
   if (simulasyon.tip === "newton-1") {
     return <Newton1Simulation slug={slug} simulasyon={simulasyon} />;
+  }
+
+  if (simulasyon.tip === "newton-2") {
+    return <Newton2Simulation slug={slug} simulasyon={simulasyon} />;
+  }
+
+  if (simulasyon.tip === "newton-3") {
+    return <Newton3Simulation slug={slug} simulasyon={simulasyon} />;
   }
 
   return <FreeFallSimulation slug={slug} simulasyon={simulasyon} />;
@@ -966,6 +976,549 @@ function Newton1Simulation({
         zorunluDeney={simulasyon.zorunlu_deney}
         observedValue={isFinished && elapsedTime >= 5 ? currentV : 0}
         isFinished={isFinished && elapsedTime >= 5}
+      />
+    </div>
+  );
+}
+
+/* ─── Newton's 2nd Law Simulation ─── */
+function Newton2Simulation({
+  slug,
+  simulasyon,
+}: SimulationWrapperProps) {
+  const [mass, setMass] = useState(5);
+  const [force, setForce] = useState(20);
+  const [isRunning, setIsRunning] = useState(false);
+  const [isFinished, setIsFinished] = useState(false);
+  
+  const [currentX, setCurrentX] = useState(0);
+  const [currentV, setCurrentV] = useState(0);
+  const [currentA, setCurrentA] = useState(0);
+  const [elapsedTime, setElapsedTime] = useState(0);
+  
+  const animFrameRef = useRef<number | null>(null);
+  const startTimeRef = useRef<number>(0);
+
+  const startSimulation = useCallback(() => {
+    if (animFrameRef.current !== null) {
+      cancelAnimationFrame(animFrameRef.current);
+    }
+    
+    setIsRunning(true);
+    setIsFinished(false);
+    setCurrentX(0);
+    setCurrentV(0);
+    setCurrentA(force / mass);
+    setElapsedTime(0);
+
+    startTimeRef.current = performance.now();
+
+    const animate = (now: number) => {
+      const rawElapsed = (now - startTimeRef.current) / 1000;
+      const elapsed = rawElapsed * TIME_SCALE;
+      
+      const { x, v, a } = getNewton2Position(force, mass, elapsed);
+      
+      const maxDistance = 600; 
+      if (elapsed >= 5 || x > maxDistance) {
+        setCurrentX(x);
+        setCurrentV(v);
+        setCurrentA(a);
+        setElapsedTime(Math.min(elapsed, 5));
+        setIsRunning(false);
+        setIsFinished(true);
+        return;
+      }
+
+      setCurrentX(x);
+      setCurrentV(v);
+      setCurrentA(a);
+      setElapsedTime(elapsed);
+
+      animFrameRef.current = requestAnimationFrame(animate);
+    };
+
+    animFrameRef.current = requestAnimationFrame(animate);
+  }, [force, mass]);
+
+  // Restart simulation automatically when sliders change
+  useEffect(() => {
+    startSimulation();
+    return () => {
+      if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
+    };
+  }, [mass, force, startSimulation]);
+
+  return (
+    <div className="space-y-6">
+      <div className="flex flex-col gap-6">
+        <div className="relative w-full max-w-[600px] h-[200px] bg-white mx-auto rounded overflow-hidden shadow-inner border border-gray-200">
+          <div className="absolute inset-x-0 bottom-0 h-4 bg-[#e5e7eb] border-t-2 border-[#e5e7eb]" />
+          <div
+            className="absolute bottom-4 w-12 h-12 bg-[#2563eb] rounded-sm shadow-md flex items-center justify-center text-xs font-bold text-white transition-none"
+            style={{ left: `calc(${(currentX / Math.max(10, currentX)) * 100}% - ${(currentX / Math.max(10, currentX)) * 3}rem)` }}
+          >
+            {mass}kg
+            {/* Force Indicator Arrow */}
+            {force > 0 && (
+              <div 
+                className="absolute left-full top-1/2 -translate-y-1/2 h-1 bg-red-500"
+                style={{ width: `${Math.max(10, force)}px` }}
+              >
+                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 border-t-2 border-r-2 border-red-500 rotate-45 transform translate-x-px" />
+                <div className="absolute left-full ml-2 -translate-y-1/2 whitespace-nowrap text-xs font-medium text-red-600">
+                  {force} N
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-2">
+          <div className="flex flex-col gap-4 rounded-xl border border-zinc-200 bg-white p-5">
+            <h4 className="text-sm font-semibold uppercase tracking-wide text-zinc-500">
+              Kontrol Paneli
+            </h4>
+            
+            <div className="space-y-4">
+              <div>
+                <label className="flex justify-between text-sm font-medium text-zinc-700 mb-2">
+                  <span>Kütle (kg)</span>
+                  <span className="font-semibold text-blue-600">{mass}</span>
+                </label>
+                <input
+                  type="range"
+                  min="1"
+                  max="20"
+                  step="1"
+                  value={mass}
+                  onChange={(e) => setMass(Number(e.target.value))}
+                  className="w-full accent-blue-600"
+                />
+              </div>
+
+              <div>
+                <label className="flex justify-between text-sm font-medium text-zinc-700 mb-2">
+                  <span>Kuvvet (N)</span>
+                  <span className="font-semibold text-blue-600">{force}</span>
+                </label>
+                <input
+                  type="range"
+                  min="5"
+                  max="100"
+                  step="5"
+                  value={force}
+                  onChange={(e) => setForce(Number(e.target.value))}
+                  className="w-full accent-blue-600"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="rounded-xl border border-zinc-200 bg-white p-5">
+            <h4 className="text-sm font-semibold uppercase tracking-wide text-zinc-500 mb-4">
+              Gözlem Paneli
+            </h4>
+            <div className="grid grid-cols-2 gap-3">
+              <div
+                className={`col-span-1 rounded-lg border px-4 py-3 transition-colors ${
+                  isRunning ? "border-blue-200 bg-blue-50" : "border-zinc-100 bg-zinc-50"
+                }`}
+              >
+                <p className="text-xs text-zinc-500">Geçen Süre (t)</p>
+                <p
+                  className={`mt-1 font-mono text-lg font-semibold ${
+                    isRunning ? "text-blue-700" : "text-zinc-900"
+                  }`}
+                >
+                  {elapsedTime.toFixed(2)} s
+                </p>
+              </div>
+
+              <div
+                className={`col-span-1 rounded-lg border px-4 py-3 transition-colors ${
+                  isRunning ? "border-blue-200 bg-blue-50" : "border-zinc-100 bg-zinc-50"
+                }`}
+              >
+                <p className="text-xs text-zinc-500">Konum (x)</p>
+                <p
+                  className={`mt-1 font-mono text-lg font-semibold ${
+                    isRunning ? "text-blue-700" : "text-zinc-900"
+                  }`}
+                >
+                  {currentX.toFixed(1)} m
+                </p>
+              </div>
+
+              <div
+                className={`col-span-1 rounded-lg border px-4 py-3 transition-colors ${
+                  isRunning ? "border-blue-200 bg-blue-50" : "border-zinc-100 bg-zinc-50"
+                }`}
+              >
+                <p className="text-xs text-zinc-500">Hız (v)</p>
+                <p
+                  className={`mt-1 font-mono text-lg font-semibold ${
+                    isRunning ? "text-blue-700" : "text-zinc-900"
+                  }`}
+                >
+                  {currentV.toFixed(1)} m/s
+                </p>
+              </div>
+
+              <div
+                className={`col-span-1 rounded-lg border px-4 py-3 transition-colors ${
+                  isRunning ? "border-blue-200 bg-blue-50" : "border-zinc-100 bg-zinc-50"
+                }`}
+              >
+                <p className="text-xs text-zinc-500">İvme (a)</p>
+                <p
+                  className={`mt-1 font-mono text-lg font-semibold ${
+                    isRunning ? "text-blue-700" : "text-zinc-900"
+                  }`}
+                >
+                  {currentA.toFixed(2)} m/s²
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <CompletionCheck
+        slug={slug}
+        zorunluDeney={simulasyon.zorunlu_deney}
+        observedValue={currentA}
+        isFinished={true}
+      />
+    </div>
+  );
+}
+
+/* ─── Newton's 3rd Law Simulation ─── */
+function Newton3Simulation({
+  slug,
+  simulasyon,
+}: SimulationWrapperProps) {
+  const [m1, setM1] = useState(5);
+  const [m2, setM2] = useState(5);
+  const [v0, setV0] = useState(15);
+  
+  const [isRunning, setIsRunning] = useState(false);
+  const [isFinished, setIsFinished] = useState(false);
+  const [hasCollided, setHasCollided] = useState(false);
+  
+  const initialX1 = 50;
+  const initialX2 = 300;
+  
+  const [x1, setX1] = useState(initialX1);
+  const [x2, setX2] = useState(initialX2);
+  const [v1, setV1] = useState(v0);
+  const [v2, setV2] = useState(0);
+  const [f1, setF1] = useState(0);
+  const [f2, setF2] = useState(0);
+  const [collisionTime, setCollisionTime] = useState(-1);
+  const [elapsedTime, setElapsedTime] = useState(0);
+  
+  const animFrameRef = useRef<number | null>(null);
+  const startTimeRef = useRef<number>(0);
+
+  const handleStart = useCallback(() => {
+    if (isRunning) return;
+
+    // Reset state
+    if (animFrameRef.current !== null) {
+      cancelAnimationFrame(animFrameRef.current);
+    }
+    
+    setIsRunning(true);
+    setIsFinished(false);
+    setHasCollided(false);
+    setX1(initialX1);
+    setX2(initialX2);
+    setV1(v0);
+    setV2(0);
+    setF1(0);
+    setF2(0);
+    setCollisionTime(-1);
+    setElapsedTime(0);
+
+    startTimeRef.current = performance.now();
+    let localHasCollided = false;
+
+    const animate = (now: number) => {
+      const rawElapsed = (now - startTimeRef.current) / 1000;
+      const elapsed = rawElapsed * TIME_SCALE;
+      const SCALE = 10;
+      
+      let newX1 = initialX1 + (v0 * SCALE) * elapsed;
+      let newX2 = initialX2;
+      let currentV1 = v0;
+      let currentV2 = 0;
+      
+      const blockWidth = 50; 
+      
+      // Collision detection
+      if (!localHasCollided && newX1 + blockWidth >= newX2) {
+        localHasCollided = true;
+        setHasCollided(true);
+        setCollisionTime(elapsed);
+        
+        const { v1Final, v2Final } = calculateCollision(m1, v0, m2, 0, 1.0);
+        
+        const force1 = getImpactForce(m1, v0, v1Final, 0.1);
+        const force2 = getImpactForce(m2, 0, v2Final, 0.1);
+        
+        setF1(force1);
+        setF2(force2);
+        
+        setV1(v1Final);
+        setV2(v2Final);
+      }
+      
+      if (localHasCollided) {
+        // Find how long ago collision happened
+        // Note: setting states is async, so we use elapsed to estimate
+        // If we know distance between them at collision is blockWidth:
+        // Collision happened when initialX1 + v0 * tCol = initialX2 - blockWidth
+        const tCol = (initialX2 - blockWidth - initialX1) / (v0 * SCALE);
+        const timeSinceCol = elapsed - tCol;
+        
+        const { v1Final, v2Final } = calculateCollision(m1, v0, m2, 0, 1.0);
+        currentV1 = v1Final;
+        currentV2 = v2Final;
+        
+        newX1 = (initialX2 - blockWidth) + (v1Final * SCALE) * timeSinceCol;
+        newX2 = initialX2 + (v2Final * SCALE) * timeSinceCol;
+      }
+      
+      setX1(newX1);
+      setX2(newX2);
+      setElapsedTime(elapsed);
+      
+      if (newX2 > 600 || newX1 < 0 || elapsed > 10) {
+        setIsRunning(false);
+        setIsFinished(true);
+        return;
+      }
+
+      animFrameRef.current = requestAnimationFrame(animate);
+    };
+
+    animFrameRef.current = requestAnimationFrame(animate);
+  }, [isRunning, m1, m2, v0]);
+
+  const handleReset = useCallback(() => {
+    if (animFrameRef.current !== null) {
+      cancelAnimationFrame(animFrameRef.current);
+      animFrameRef.current = null;
+    }
+    setIsRunning(false);
+    setIsFinished(false);
+    setHasCollided(false);
+    setX1(initialX1);
+    setX2(initialX2);
+    setV1(v0);
+    setV2(0);
+    setF1(0);
+    setF2(0);
+    setCollisionTime(-1);
+    setElapsedTime(0);
+  }, [v0]);
+
+
+  const showForces = hasCollided && (elapsedTime - collisionTime < 0.5) && collisionTime !== -1;
+  const kuvvet_farki = Math.abs(f1 - f2);
+
+  return (
+    <div className="space-y-6">
+      <div className="flex flex-col gap-6">
+        <div className="relative w-full max-w-[600px] h-[250px] bg-white mx-auto rounded overflow-hidden shadow-inner border border-gray-200">
+          <div className="absolute inset-x-0 bottom-0 h-4 bg-[#e5e7eb] border-t-2 border-[#e5e7eb]" />
+          
+          {/* Block A */}
+          <div
+            className="absolute bottom-4 h-12 bg-[#2563eb] rounded-sm shadow-md flex items-center justify-center text-xs font-bold text-white transition-none"
+            style={{ 
+              left: `${x1}px`,
+              width: '50px'
+            }}
+          >
+            A ({m1}kg)
+            {/* Force on A (from right to left) */}
+            {showForces && (
+              <div 
+                className="absolute right-full top-1/2 -translate-y-1/2 h-1 bg-red-500 z-10"
+                style={{ width: `${Math.min(100, f1 * 2)}px` }}
+              >
+                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-3 h-3 border-b-2 border-l-2 border-red-500 rotate-45 transform -translate-x-px" />
+                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 whitespace-nowrap text-xs font-bold text-red-600">
+                  F<sub>BA</sub>
+                </div>
+              </div>
+            )}
+          </div>
+          
+          {/* Block B */}
+          <div
+            className="absolute bottom-4 h-12 bg-[#16a34a] rounded-sm shadow-md flex items-center justify-center text-xs font-bold text-white transition-none"
+            style={{ 
+              left: `${x2}px`, 
+              width: '50px'
+            }}
+          >
+            B ({m2}kg)
+            {/* Force on B (from left to right) */}
+            {showForces && (
+              <div 
+                className="absolute left-full top-1/2 -translate-y-1/2 h-1 bg-red-500 z-10"
+                style={{ width: `${Math.min(100, f2 * 2)}px` }}
+              >
+                <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 border-t-2 border-r-2 border-red-500 rotate-45 transform translate-x-px" />
+                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 whitespace-nowrap text-xs font-bold text-red-600">
+                  F<sub>AB</sub>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="grid gap-6 lg:grid-cols-2">
+          <div className="flex flex-col gap-4 rounded-xl border border-zinc-200 bg-white p-5">
+            <h4 className="text-sm font-semibold uppercase tracking-wide text-zinc-500">
+              Kontrol Paneli
+            </h4>
+            
+            <div className="space-y-4">
+              <div>
+                <label className="flex justify-between text-sm font-medium text-zinc-700 mb-2">
+                  <span>Kütle A (kg)</span>
+                  <span className="font-semibold text-blue-600">{m1}</span>
+                </label>
+                <input
+                  type="range"
+                  min="1"
+                  max="20"
+                  step="1"
+                  value={m1}
+                  onChange={(e) => setM1(Number(e.target.value))}
+                  className="w-full accent-blue-600"
+                  disabled={isRunning}
+                />
+              </div>
+
+              <div>
+                <label className="flex justify-between text-sm font-medium text-zinc-700 mb-2">
+                  <span>Kütle B (kg)</span>
+                  <span className="font-semibold text-green-600">{m2}</span>
+                </label>
+                <input
+                  type="range"
+                  min="1"
+                  max="20"
+                  step="1"
+                  value={m2}
+                  onChange={(e) => setM2(Number(e.target.value))}
+                  className="w-full accent-green-600"
+                  disabled={isRunning}
+                />
+              </div>
+
+              <div>
+                <label className="flex justify-between text-sm font-medium text-zinc-700 mb-2">
+                  <span>Başlangıç Hızı A (m/s)</span>
+                  <span className="font-semibold text-blue-600">{v0}</span>
+                </label>
+                <input
+                  type="range"
+                  min="5"
+                  max="30"
+                  step="1"
+                  value={v0}
+                  onChange={(e) => {
+                    setV0(Number(e.target.value));
+                    if (!isRunning) setV1(Number(e.target.value));
+                  }}
+                  className="w-full accent-blue-600"
+                  disabled={isRunning}
+                />
+              </div>
+            </div>
+
+            <div className="flex gap-3 mt-2">
+              <button
+                onClick={handleStart}
+                disabled={isRunning}
+                className="flex-1 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Başlat
+              </button>
+              <button
+                onClick={handleReset}
+                disabled={isRunning && !isFinished}
+                className="flex-1 rounded-lg border border-zinc-300 px-4 py-2.5 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-50 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Sıfırla
+              </button>
+            </div>
+          </div>
+
+          <div className="rounded-xl border border-zinc-200 bg-white p-5">
+            <h4 className="text-sm font-semibold uppercase tracking-wide text-zinc-500 mb-4">
+              Gözlem Paneli
+            </h4>
+            <div className="grid grid-cols-2 gap-3">
+              <div
+                className={`col-span-1 rounded-lg border px-4 py-3 transition-colors ${
+                  isRunning ? "border-blue-200 bg-blue-50" : "border-zinc-100 bg-zinc-50"
+                }`}
+              >
+                <p className="text-xs text-zinc-500">Çarpışmada F1</p>
+                <p
+                  className={`mt-1 font-mono text-lg font-semibold ${
+                    showForces ? "text-red-600" : "text-zinc-900"
+                  }`}
+                >
+                  {hasCollided ? f1.toFixed(1) + " N" : "--"}
+                </p>
+              </div>
+
+              <div
+                className={`col-span-1 rounded-lg border px-4 py-3 transition-colors ${
+                  isRunning ? "border-blue-200 bg-blue-50" : "border-zinc-100 bg-zinc-50"
+                }`}
+              >
+                <p className="text-xs text-zinc-500">Çarpışmada F2</p>
+                <p
+                  className={`mt-1 font-mono text-lg font-semibold ${
+                    showForces ? "text-red-600" : "text-zinc-900"
+                  }`}
+                >
+                  {hasCollided ? f2.toFixed(1) + " N" : "--"}
+                </p>
+              </div>
+
+              <div
+                className={`col-span-2 rounded-lg border px-4 py-3 transition-colors ${
+                  isRunning ? "border-blue-200 bg-blue-50" : "border-zinc-100 bg-zinc-50"
+                }`}
+              >
+                <p className="text-xs text-zinc-500">Kuvvet Farkı |F1 - F2|</p>
+                <p
+                  className={`mt-1 font-mono text-lg font-semibold ${
+                    hasCollided ? "text-blue-700" : "text-zinc-900"
+                  }`}
+                >
+                  {hasCollided ? kuvvet_farki.toFixed(2) + " N" : "--"}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <CompletionCheck
+        slug={slug}
+        zorunluDeney={simulasyon.zorunlu_deney}
+        observedValue={hasCollided ? Math.round(kuvvet_farki * 10) / 10 : -99}
+        isFinished={hasCollided}
       />
     </div>
   );

@@ -1,0 +1,60 @@
+{
+  "id": "newton-2-yasa",
+  "slug": "newton-2-yasa",
+  "baslik": "Newton'un 2. Yasası",
+  "ozet": "Bir cisme etki eden net kuvvet, kütlesi ile ivmesinin çarpımına eşittir.",
+  "analatim": "Newton'un 2. yasası kuvvet, kütle ve ivme arasındaki ilişkiyi tanımlar. Net kuvvet sabitken kütle artarsa ivme azalır, kütle azalırsa ivme artar...",
+  "formuller": [
+    { "label": "Temel bağıntı", "latex": "F = m \\cdot a" },
+    { "label": "İvme", "latex": "a = \\frac{F}{m}" },
+    { "label": "Net kuvvet", "latex": "F_{net} = \\sum F" }
+  ],
+  "sorular": [
+    {
+      "id": 1,
+      "soru": "10 kg kütleli cisme 50 N net kuvvet uygulanırsa ivmesi nedir?",
+      "secenekler": ["2 m/s²", "5 m/s²", "10 m/s²", "500 m/s²"],
+      "dogru": 1,
+      "cozum_adimlari": [
+        "a = F / m formülünü kullanıyoruz.",
+        "a = 50 / 10",
+        "a = 5 m/s²"
+      ]
+    },
+    {
+      "id": 2,
+      "soru": "4 m/s² ivmeyle hareket eden 8 kg kütleli cisme etki eden net kuvvet nedir?",
+      "secenekler": ["2 N", "16 N", "32 N", "64 N"],
+      "dogru": 2,
+      "cozum_adimlari": [
+        "F = m · a formülünü kullanıyoruz.",
+        "F = 8 · 4",
+        "F = 32 N"
+      ]
+    },
+    {
+      "id": 3,
+      "soru": "Aynı kuvvet iki farklı kütleye uygulanıyor. Kütlesi 2 katına çıkarılırsa ivme ne olur?",
+      "secenekler": [
+        "2 katına çıkar",
+        "Aynı kalır",
+        "Yarıya düşer",
+        "4 katına çıkar"
+      ],
+      "dogru": 2,
+      "cozum_adimlari": [
+        "a = F / m bağıntısında F sabit.",
+        "m 2 katına çıkarsa a = F / 2m olur.",
+        "İvme yarıya düşer."
+      ]
+    }
+  ],
+  "simulasyon": {
+    "tip": "newton-2",
+    "zorunlu_deney": {
+      "aciklama": "Kütleyi 5 kg, kuvveti 20 N olarak ayarla ve ivmeyi gözlemle.",
+      "hedef_degisken": "ivme",
+      "hedef_aralik": { "min": 3.9, "max": 4.1 }
+    }
+  }
+}

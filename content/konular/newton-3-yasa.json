@@ -1,0 +1,64 @@
+{
+  "id": "newton-3-yasa",
+  "slug": "newton-3-yasa",
+  "baslik": "Newton'un 3. Yasası",
+  "ozet": "Her etkiye eşit büyüklükte ve zıt yönde bir tepki vardır.",
+  "analatim": "Newton'un 3. yasasına göre A cismi B cismine kuvvet uygularsa, B cismi de A cismine eşit büyüklükte fakat zıt yönde kuvvet uygular. Bu kuvvetler farklı cisimlere etki eder...",
+  "formuller": [
+    { "label": "Etki-Tepki", "latex": "F_{AB} = -F_{BA}" },
+    { "label": "Büyüklük", "latex": "|F_{AB}| = |F_{BA}|" }
+  ],
+  "sorular": [
+    {
+      "id": 1,
+      "soru": "Duvara 100 N kuvvetle itiyorsunuz. Duvarın size uyguladığı kuvvet kaçtır?",
+      "secenekler": ["0 N", "50 N", "100 N", "200 N"],
+      "dogru": 2,
+      "cozum_adimlari": [
+        "Newton'un 3. yasasına göre her etkiye eşit tepki vardır.",
+        "Duvara 100 N uygularsanız duvar size 100 N uygular.",
+        "Tepki kuvveti büyüklük olarak eşit, yön olarak zıttır."
+      ]
+    },
+    {
+      "id": 2,
+      "soru": "5 kg ve 10 kg kütleli iki cisim birbirine çarptığında hangi cisim daha büyük kuvvet uygular?",
+      "secenekler": [
+        "5 kg olan",
+        "10 kg olan",
+        "İkisi eşit kuvvet uygular",
+        "Kütlelerinin toplamı kadar"
+      ],
+      "dogru": 2,
+      "cozum_adimlari": [
+        "Newton'un 3. yasası kütleden bağımsızdır.",
+        "Her iki cisim birbirine eşit büyüklükte kuvvet uygular.",
+        "Fark ivmelerinde ortaya çıkar: hafif cisim daha çok ivmelenir."
+      ]
+    },
+    {
+      "id": 3,
+      "soru": "Roketin ileri gidebilmesi için gazları hangi yöne püskürtmesi gerekir?",
+      "secenekler": [
+        "İleri yönde",
+        "Yanlara doğru",
+        "Geri yönde",
+        "Yön önemli değil"
+      ],
+      "dogru": 2,
+      "cozum_adimlari": [
+        "Roket gazları geri püskürtür — bu etki kuvvetidir.",
+        "Newton'un 3. yasasına göre tepki kuvveti roketi ileri iter.",
+        "Gazlar ne kadar hızlı ve kütleli olursa roket o kadar çok ivmelenir."
+      ]
+    }
+  ],
+  "simulasyon": {
+    "tip": "newton-3",
+    "zorunlu_deney": {
+      "aciklama": "İki cismi çarpıştır ve her iki cisme etki eden kuvvetlerin büyüklüklerinin eşit olduğunu gözlemle.",
+      "hedef_degisken": "kuvvet_farki",
+      "hedef_aralik": { "min": -0.5, "max": 0.5 }
+    }
+  }
+}

@@ -4,5 +4,7 @@
   { "slug": "asagidan-yukari-atis", "unlocks": "yukaridan-asagi-atis" },
   { "slug": "yukaridan-asagi-atis", "unlocks": "egik-atis" },
   { "slug": "egik-atis", "unlocks": "newton-1-yasa" },
-  { "slug": "newton-1-yasa", "unlocks": null }
+  { "slug": "newton-1-yasa", "unlocks": "newton-2-yasa" },
+  { "slug": "newton-2-yasa", "unlocks": "newton-3-yasa" },
+  { "slug": "newton-3-yasa", "unlocks": null }
 ]
