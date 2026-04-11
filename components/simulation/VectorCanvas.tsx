@@ -232,6 +232,13 @@ export default function VectorCanvas({ slug, simulasyon }: { slug: string, simul
 
   // Compute Resultants
   const resultants: Resultant[] = [];
+
+  useEffect(() => {
+      const handleGlobalPointerDown = () => setSelectedId(null);
+      window.addEventListener("pointerdown", handleGlobalPointerDown);
+      return () => window.removeEventListener("pointerdown", handleGlobalPointerDown);
+  }, []);
+
   const usedInChain = new Set<string>();
 
   vectors.forEach(v => {
@@ -343,6 +350,7 @@ export default function VectorCanvas({ slug, simulasyon }: { slug: string, simul
       </div>
       
       <div className="relative mx-auto bg-white border border-gray-200 shadow-sm" style={{ width: 600, height: 500 }} 
+           onPointerDown={() => setSelectedId(null)}
            onPointerUp={onPointerUp} onPointerMove={onPointerMove} onPointerLeave={onPointerUp}>
            
           <svg width="600" height="500" className="absolute top-0 left-0 cursor-crosshair">
@@ -450,7 +458,7 @@ export default function VectorCanvas({ slug, simulasyon }: { slug: string, simul
               if (!v) return null;
               const { sx, sy } = getScreenCoords(v.x + v.dx, v.y + v.dy);
               return (
-                  <div className="absolute bg-white border border-gray-300 shadow-xl rounded p-3 z-10 w-48 text-sm" style={{ left: sx + 15, top: sy + 15 }}>
+                  <div className="absolute bg-white border border-gray-300 shadow-xl rounded p-3 z-10 w-48 text-sm" style={{ left: sx + 15, top: sy + 15 }} onPointerDown={(e) => e.stopPropagation()}>
                       <p className="font-bold text-gray-800 mb-2">{v.label} Vektörü Seçili</p>
                       
                       <div className="flex gap-2 items-center mb-2">
