@@ -1,0 +1,57 @@
+{
+  "id": "kuvvet",
+  "slug": "kuvvet",
+  "baslik": "Kuvvet",
+  "ozet": "Cisimlerin hareketini veya şeklini değiştiren etki.",
+  "analatim": "Kuvvet, bir cismin hızını, yönünü veya şeklini değiştiren etkidir. Vektörel bir büyüklük olan kuvvet Newton (N) birimiyle ölçülür. Bir cisme birden fazla kuvvet etki ediyorsa bunların vektörel toplamı bileşke kuvveti verir...",
+  "formuller": [
+    { "label": "Bileşke kuvvet", "latex": "\\vec{F}_{net} = \\sum \\vec{F}" },
+    { "label": "Ağırlık", "latex": "G = m \\cdot g" },
+    { "label": "Hooke yasası", "latex": "F = k \\cdot x" },
+    { "label": "Eğimli düzlem", "latex": "F_{parallel} = mg\\sin\\theta" },
+    { "label": "Normal kuvvet", "latex": "N = mg\\cos\\theta" }
+  ],
+  "sorular": [
+    {
+      "id": 1,
+      "soru": "Yatay düzlemde bir cisme sağa 30 N, sola 10 N kuvvet uygulanıyor. Bileşke kuvvet nedir?",
+      "secenekler": ["10 N sola", "20 N sağa", "40 N sağa", "20 N sola"],
+      "dogru": 1,
+      "cozum_adimlari": [
+        "Sağı pozitif alırsak: F_net = 30 + (−10)",
+        "F_net = 20 N",
+        "Sonuç pozitif olduğundan bileşke kuvvet sağa doğrudur."
+      ]
+    },
+    {
+      "id": 2,
+      "soru": "30° eğimli düzlemde duran 10 kg kütleli cisme etki eden eğime paralel yerçekimi bileşeni nedir? (g = 10 m/s²)",
+      "secenekler": ["50 N", "50√3 N", "100 N", "100√3 N"],
+      "dogru": 0,
+      "cozum_adimlari": [
+        "F_parallel = mg·sinθ formülünü kullanıyoruz.",
+        "F_parallel = 10 · 10 · sin30°",
+        "F_parallel = 100 · 0.5 = 50 N"
+      ]
+    },
+    {
+      "id": 3,
+      "soru": "Yay sabiti 200 N/m olan yay 0.1 m uzatılırsa yay kuvveti nedir?",
+      "secenekler": ["2 N", "20 N", "200 N", "2000 N"],
+      "dogru": 1,
+      "cozum_adimlari": [
+        "F = k · x formülünü kullanıyoruz.",
+        "F = 200 · 0.1",
+        "F = 20 N"
+      ]
+    }
+  ],
+  "simulasyon": {
+    "tip": "kuvvet",
+    "zorunlu_deney": {
+      "aciklama": "Bileşke kuvvet modunda cisme sağa 40 N ve yukarı 30 N kuvvet uygula. Bileşke kuvvetin büyüklüğünün 50 N olduğunu gözlemle.",
+      "hedef_degisken": "bileskekuvvet",
+      "hedef_aralik": { "min": 49.5, "max": 50.5 }
+    }
+  }
+}

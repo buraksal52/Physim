@@ -7,5 +7,6 @@
   { "slug": "newton-1-yasa", "unlocks": "newton-2-yasa" },
   { "slug": "newton-2-yasa", "unlocks": "newton-3-yasa" },
   { "slug": "newton-3-yasa", "unlocks": "vektorler" },
-  { "slug": "vektorler", "unlocks": null }
+  { "slug": "vektorler", "unlocks": "kuvvet" },
+  { "slug": "kuvvet", "unlocks": null }
 ]

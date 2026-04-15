@@ -43,6 +43,7 @@ import AngledThrowControlPanel from "./AngledThrowControlPanel";
 import AngledThrowObservationPanel from "./AngledThrowObservationPanel";
 import CompletionCheck from "./CompletionCheck";
 import VectorCanvas from "./VectorCanvas";
+import ForceCanvas from "./ForceCanvas";
 
 interface SimulationWrapperProps {
   slug: string;
@@ -58,6 +59,10 @@ export default function SimulationWrapper({
 }: SimulationWrapperProps) {
   if (simulasyon.tip === "yatay-atis") {
     return <ProjectileSimulation slug={slug} simulasyon={simulasyon} />;
+  }
+
+  if (simulasyon.tip === "kuvvet") {
+    return <ForceCanvas slug={slug} simulation={simulasyon} onComplete={() => {}} />;
   }
 
   if (simulasyon.tip === "asagidan-yukari-atis") {
