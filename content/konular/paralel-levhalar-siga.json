@@ -1,0 +1,74 @@
+{
+  "id": "paralel-levhalar-siga",
+  "slug": "paralel-levhalar-siga",
+  "baslik": "Paralel Levhalar ve Sığa",
+  "ozet": "Paralel iletken levhalar arasındaki elektrik alan ve kondansatörlerin yük depolama kapasitesi.",
+  "analatim": "Paralel levhalar arasında düzgün bir elektrik alan oluşur. Kondansatör, iki iletken levha arasında elektrik yükü depolayan devre elemanıdır. Sığa, birim gerilim başına depolanan yük miktarını ifade eder...",
+  "formuller": [
+    { "label": "Sığa", "latex": "C = \\frac{Q}{V}" },
+    { "label": "Paralel plaka sığası", "latex": "C = \\varepsilon_0 \\frac{A}{d}" },
+    { "label": "Elektrik alan", "latex": "E = \\frac{V}{d} = \\frac{\\sigma}{\\varepsilon_0}" },
+    { "label": "Depolanan enerji", "latex": "U = \\frac{1}{2}CV^2 = \\frac{Q^2}{2C}" },
+    { "label": "Seri bağlı", "latex": "\\frac{1}{C_{eq}} = \\frac{1}{C_1} + \\frac{1}{C_2}" },
+    { "label": "Paralel bağlı", "latex": "C_{eq} = C_1 + C_2" }
+  ],
+  "sorular": [
+    {
+      "id": 1,
+      "soru": "100 V gerilim uygulandığında 500 μC yük depolayan kondansatörün sığası nedir?",
+      "secenekler": ["0.5 μF", "5 μF", "50 μF", "500 μF"],
+      "dogru": 1,
+      "cozum_adimlari": [
+        "C = Q/V formülünü kullanıyoruz.",
+        "C = 500×10⁻⁶ / 100",
+        "C = 5×10⁻⁶ F = 5 μF"
+      ]
+    },
+    {
+      "id": 2,
+      "soru": "4 μF ve 12 μF kondansatörler seri bağlandığında eşdeğer sığa nedir?",
+      "secenekler": ["1 μF", "3 μF", "8 μF", "16 μF"],
+      "dogru": 1,
+      "cozum_adimlari": [
+        "1/C_eq = 1/C₁ + 1/C₂ formülünü kullanıyoruz.",
+        "1/C_eq = 1/4 + 1/12 = 3/12 + 1/12 = 4/12",
+        "C_eq = 12/4 = 3 μF"
+      ]
+    },
+    {
+      "id": 3,
+      "soru": "10 μF sığalı kondansatör 200 V gerilime bağlanıyor. Depolanan enerji nedir?",
+      "secenekler": ["0.1 J", "0.2 J", "0.4 J", "2 J"],
+      "dogru": 1,
+      "cozum_adimlari": [
+        "U = ½CV² formülünü kullanıyoruz.",
+        "U = ½ × 10×10⁻⁶ × 200²",
+        "U = ½ × 10×10⁻⁶ × 40000 = 0.2 J"
+      ]
+    },
+    {
+      "id": 4,
+      "soru": "Paralel levhalar arasındaki mesafe iki katına çıkarılırsa sığa nasıl değişir?",
+      "secenekler": [
+        "2 katına çıkar",
+        "4 katına çıkar",
+        "Yarıya düşer",
+        "Değişmez"
+      ],
+      "dogru": 2,
+      "cozum_adimlari": [
+        "C = ε₀A/d formülünde A ve ε₀ sabit, d değişiyor.",
+        "d iki katına çıkarsa C = ε₀A/2d olur.",
+        "Sığa yarıya düşer."
+      ]
+    }
+  ],
+  "simulasyon": {
+    "tip": "paralel-levhalar-siga",
+    "zorunlu_deney": {
+      "aciklama": "Yük depolama modunda sığayı 5 μF, gerilimi 100 V olarak ayarla. Depolanan enerjinin 0.025 J olduğunu gözlemle.",
+      "hedef_degisken": "depolanan_enerji",
+      "hedef_aralik": { "min": 0.024, "max": 0.026 }
+    }
+  }
+}

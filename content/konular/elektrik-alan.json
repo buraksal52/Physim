@@ -1,0 +1,61 @@
+{
+  "id": "elektrik-alan",
+  "slug": "elektrik-alan",
+  "baslik": "Elektrik Alan",
+  "ozet": "Yüklü cisimlerin çevresinde oluşturduğu kuvvet alanı.",
+  "analatim": "Elektrik alan, bir noktaya yerleştirilen birim pozitif yükün maruz kalacağı elektrik kuvvetini tanımlar. Pozitif yüklerden uzaklaşır, negatif yüklere doğru yaklaşır. Alan çizgileri elektrik alanın yönünü ve şiddetini görselleştirir...",
+  "formuller": [
+    { "label": "Elektrik alan", "latex": "E = \\frac{F}{q} = k\\frac{Q}{r^2}" },
+    { "label": "Coulomb sabiti", "latex": "k = 9 \\times 10^9 \\, \\text{N·m}^2/\\text{C}^2" },
+    { "label": "Paralel plaka", "latex": "E = \\frac{V}{d}" },
+    { "label": "Kuvvet", "latex": "F = qE" }
+  ],
+  "sorular": [
+    {
+      "id": 1,
+      "soru": "2×10⁻⁶ C yükten 3 m uzaklıktaki elektrik alan şiddeti nedir? (k = 9×10⁹ N·m²/C²)",
+      "secenekler": ["1000 N/C", "2000 N/C", "3000 N/C", "6000 N/C"],
+      "dogru": 1,
+      "cozum_adimlari": [
+        "E = kQ/r² formülünü kullanıyoruz.",
+        "E = (9×10⁹ × 2×10⁻⁶) / 3²",
+        "E = 18000 / 9 = 2000 N/C"
+      ]
+    },
+    {
+      "id": 2,
+      "soru": "Elektrik alan çizgileri hakkında hangisi doğrudur?",
+      "secenekler": [
+        "Negatif yükten çıkar pozitife girer",
+        "Pozitif yükten çıkar negatife girer",
+        "Yüklerden bağımsızdır",
+        "Kapalı eğriler oluşturur"
+      ],
+      "dogru": 1,
+      "cozum_adimlari": [
+        "Alan çizgileri pozitif yükten çıkar.",
+        "Negatif yüke doğru girer.",
+        "Çizgiler birbirini kesmez ve kapalı eğri oluşturmaz."
+      ]
+    },
+    {
+      "id": 3,
+      "soru": "Plakaları arasındaki mesafe 0.02 m, potansiyel farkı 100 V olan paralel plakanın alan şiddeti nedir?",
+      "secenekler": ["2 N/C", "200 N/C", "2000 N/C", "5000 N/C"],
+      "dogru": 3,
+      "cozum_adimlari": [
+        "E = V/d formülünü kullanıyoruz.",
+        "E = 100 / 0.02",
+        "E = 5000 N/C"
+      ]
+    }
+  ],
+  "simulasyon": {
+    "tip": "elektrik-alan",
+    "zorunlu_deney": {
+      "aciklama": "Nokta yük modunda 2×10⁻⁶ C yük yerleştir. Yükten 3 m uzaklıktaki alan şiddetinin 2000 N/C olduğunu gözlemle.",
+      "hedef_degisken": "alan_siddeti",
+      "hedef_aralik": { "min": 1900, "max": 2100 }
+    }
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "id": "basit-makineler-makara",
+  "slug": "basit-makineler-makara",
+  "baslik": "Basit Makineler: Makara",
+  "ozet": "İp ve tekerlek sistemiyle kuvvet yönünü değiştiren veya kuvvet kazancı sağlayan basit makine.",
+  "analatim": "Makara, bir eksen etrafında dönen ve üzerinden ip geçen tekerlek sistemidir. Sabit makara yalnızca kuvvetin yönünü değiştirir. Hareketli makara ise kuvvet kazancı sağlar. Kombinasyon makaralar her ikisini birleştirir...",
+  "formuller": [
+    { "label": "Sabit makara", "latex": "F = G" },
+    { "label": "Hareketli makara", "latex": "F = \\frac{G}{2}" },
+    { "label": "n makaralı sistem", "latex": "F = \\frac{G}{n}" },
+    { "label": "Kuvvet kazancı", "latex": "KK = \\frac{G}{F} = n" }
+  ],
+  "sorular": [
+    {
+      "id": 1,
+      "soru": "Tek hareketli makarayla 300 N ağırlığı kaldırmak için gereken kuvvet nedir?",
+      "secenekler": ["75 N", "100 N", "150 N", "300 N"],
+      "dogru": 2,
+      "cozum_adimlari": [
+        "Hareketli makarada F = G/2 formülünü kullanıyoruz.",
+        "F = 300 / 2",
+        "F = 150 N"
+      ]
+    },
+    {
+      "id": 2,
+      "soru": "Sabit makara kullanmanın temel faydası nedir?",
+      "secenekler": [
+        "Kuvvet kazancı sağlar",
+        "Yol kazancı sağlar",
+        "Kuvvetin yönünü değiştirir",
+        "Sürtünmeyi azaltır"
+      ],
+      "dogru": 2,
+      "cozum_adimlari": [
+        "Sabit makarada ip üzerindeki gerilim her yerde eşittir.",
+        "Bu nedenle kuvvet kazancı sağlamaz.",
+        "Tek faydası kuvvetin yönünü değiştirmektir."
+      ]
+    },
+    {
+      "id": 3,
+      "soru": "4 hareketli makara içeren sistemde 800 N yükü kaldırmak için gereken minimum kuvvet nedir?",
+      "secenekler": ["100 N", "200 N", "400 N", "800 N"],
+      "dogru": 1,
+      "cozum_adimlari": [
+        "n hareketli makaralı sistemde F = G/n formülünü kullanıyoruz.",
+        "F = 800 / 4",
+        "F = 200 N"
+      ]
+    }
+  ],
+  "simulasyon": {
+    "tip": "makara",
+    "zorunlu_deney": {
+      "aciklama": "2 hareketli makara sistemi kur ve 400 N yükü kaldır. Gereken kuvvetin 200 N olduğunu gözlemle.",
+      "hedef_degisken": "gereken_kuvvet",
+      "hedef_aralik": { "min": 99, "max": 101 }
+    }
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "id": "denge",
+  "slug": "denge",
+  "baslik": "Denge",
+  "ozet": "Net kuvvet ve net torkun sıfır olduğu durumda cisimler dengede kalır.",
+  "analatim": "Bir cisim hem öteleme hem de dönme dengesi için iki koşulu sağlamalıdır: net kuvvet sıfır olmalı ve net tork sıfır olmalıdır. Bu iki koşul birlikte statik denge durumunu tanımlar...",
+  "formuller": [
+    { "label": "Öteleme dengesi", "latex": "\\sum \\vec{F} = 0" },
+    { "label": "Dönme dengesi", "latex": "\\sum \\tau = 0" },
+    { "label": "Tahterevalli", "latex": "F_1 \\cdot d_1 = F_2 \\cdot d_2" }
+  ],
+  "sorular": [
+    {
+      "id": 1,
+      "soru": "Tahterevallinin sol kolunda 2 m uzaklıkta 30 N ağırlık var. Sağ kolda denge için 3 m uzaklığa kaç N ağırlık asılmalıdır?",
+      "secenekler": ["10 N", "20 N", "30 N", "45 N"],
+      "dogru": 1,
+      "cozum_adimlari": [
+        "F₁ · d₁ = F₂ · d₂ denge koşulunu kullanıyoruz.",
+        "30 · 2 = F₂ · 3",
+        "F₂ = 60 / 3 = 20 N"
+      ]
+    },
+    {
+      "id": 2,
+      "soru": "Dengede olan bir cisim için net kuvvet ve net tork kaçtır?",
+      "secenekler": [
+        "Net kuvvet sıfır, net tork sıfır değil",
+        "Net kuvvet sıfır değil, net tork sıfır",
+        "İkisi de sıfır",
+        "İkisi de sıfır değil"
+      ],
+      "dogru": 2,
+      "cozum_adimlari": [
+        "Statik denge için iki koşul gereklidir.",
+        "ΣF = 0 öteleme dengesini sağlar.",
+        "Στ = 0 dönme dengesini sağlar."
+      ]
+    },
+    {
+      "id": 3,
+      "soru": "Duvara yaslanmış bir merdivende sürtünme kuvveti hangi yönde etki eder?",
+      "secenekler": [
+        "Duvarda yukarı, zeminde sağa",
+        "Duvarda aşağı, zeminde sola",
+        "Duvarda yok, zeminde yukarı",
+        "Duvarda aşağı, zeminde yukarı"
+      ],
+      "dogru": 0,
+      "cozum_adimlari": [
+        "Duvar pürüzsüz kabul edilirse duvarda yalnızca yatay normal kuvvet vardır.",
+        "Zemin hem normal kuvvet (yukarı) hem sürtünme (yatay) uygular.",
+        "Merdiven kaymaya çalıştığından zemindeki sürtünme sağa doğrudur."
+      ]
+    }
+  ],
+  "simulasyon": {
+    "tip": "denge",
+    "zorunlu_deney": {
+      "aciklama": "Tahterevalli modunda sol kola 2 m uzaklığa 40 N, sağ kola uygun uzaklığa 20 N ağırlık koy ve dengeyi sağla.",
+      "hedef_degisken": "net_tork",
+      "hedef_aralik": { "min": -1, "max": 1 }
+    }
+  }
+}

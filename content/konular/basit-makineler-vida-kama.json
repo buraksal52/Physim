@@ -1,0 +1,55 @@
+{
+  "id": "basit-makineler-vida-kama",
+  "slug": "basit-makineler-vida-kama",
+  "baslik": "Basit Makineler: Vida ve Kama",
+  "ozet": "Dönel hareketi doğrusal kuvvete çeviren vida ve kuvvet yönünü bölen kama.",
+  "analatim": "Vida, sarmal eğimli düzlem olarak düşünülebilir. Her tam turda vida diş adımı kadar ilerlir. Kama ise iki eğimli düzlemin birleşiminden oluşur ve uygulanan kuvveti ikiye bölerek yanlara iletir...",
+  "formuller": [
+    { "label": "Vida kuvvet kazancı", "latex": "KK = \\frac{2\\pi r}{p}" },
+    { "label": "Vida ilerlemesi", "latex": "d = n \\cdot p" },
+    { "label": "Kama kuvvet kazancı", "latex": "KK = \\frac{L}{t}" }
+  ],
+  "sorular": [
+    {
+      "id": 1,
+      "soru": "Diş adımı 2 mm, kol uzunluğu 20 cm olan vidanın kuvvet kazancı nedir?",
+      "secenekler": ["10", "100π", "200π", "628"],
+      "dogru": 2,
+      "cozum_adimlari": [
+        "KK = 2πr / p formülünü kullanıyoruz.",
+        "KK = 2π · 0.20 / 0.002",
+        "KK = 2π · 100 = 200π ≈ 628"
+      ]
+    },
+    {
+      "id": 2,
+      "soru": "Diş adımı 1 mm olan vida 5 tam tur döndürülürse ne kadar ilerler?",
+      "secenekler": ["1 mm", "5 mm", "10 mm", "50 mm"],
+      "dogru": 1,
+      "cozum_adimlari": [
+        "d = n · p formülünü kullanıyoruz.",
+        "d = 5 · 1 mm",
+        "d = 5 mm"
+      ]
+    },
+    {
+      "id": 3,
+      "soru": "Kama uzunluğu 10 cm, kalınlığı 2 cm olan kamanın kuvvet kazancı nedir?",
+      "secenekler": ["2", "5", "10", "20"],
+      "dogru": 1,
+      "cozum_adimlari": [
+        "KK = L / t formülünü kullanıyoruz.",
+        "KK = 10 / 2",
+        "KK = 5"
+      ]
+    }
+  ],
+  "simulasyon": {
+    "tip": "vida-kama",
+    "zorunlu_deney": {
+      "aciklama": "Vida modunda diş adımını 2 mm, kol uzunluğunu 15 cm olarak ayarla. Kuvvet kazancını gözlemle.",
+      "hedef_degisken": "kuvvet_kazanci",
+      "hedef_aralik": { "min": 465, "max": 475 }
+    }
+  }
+}

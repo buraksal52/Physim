@@ -44,6 +44,25 @@ import AngledThrowObservationPanel from "./AngledThrowObservationPanel";
 import CompletionCheck from "./CompletionCheck";
 import VectorCanvas from "./VectorCanvas";
 import ForceCanvas from "./ForceCanvas";
+import TorqueCanvas from "./TorqueCanvas";
+import EquilibriumCanvas from "./EquilibriumCanvas";
+import CenterOfMassCanvas from "./CenterOfMassCanvas";
+import LeverCanvas from "./LeverCanvas";
+import PulleyCanvas from "./PulleyCanvas";
+import InclinedPlaneCanvas from "./InclinedPlaneCanvas";
+import ScrewWedgeCanvas from "./ScrewWedgeCanvas";
+import GearCanvas from "./GearCanvas";
+import MotionCanvas from "./MotionCanvas";
+import WorkCanvas from "./WorkCanvas";
+import PowerCanvas from "./PowerCanvas";
+import EnergyCanvas from "./EnergyCanvas";
+import ImpulseCanvas from "./ImpulseCanvas";
+import MomentumCanvas from "./MomentumCanvas";
+import ElectricFieldCanvas from "./ElectricFieldCanvas";
+import ElectricPotentialCanvas from "./ElectricPotentialCanvas";
+import CapacitorCanvas from "./CapacitorCanvas";
+import MagneticFieldCanvas from "./MagneticFieldCanvas";
+import MagneticForceCanvas from "./MagneticForceCanvas";
 
 interface SimulationWrapperProps {
   slug: string;
@@ -57,6 +76,46 @@ export default function SimulationWrapper({
   slug,
   simulasyon,
 }: SimulationWrapperProps) {
+  if (simulasyon.tip === "hareket") {
+    return <MotionCanvas slug={slug} simulation={simulasyon} onComplete={() => {}} />;
+  }
+
+  if (simulasyon.tip === "is") {
+    return <WorkCanvas slug={slug} simulation={simulasyon} onComplete={() => {}} />;
+  }
+
+  if (simulasyon.tip === "guc") {
+    return <PowerCanvas slug={slug} simulation={simulasyon} onComplete={() => {}} />;
+  }
+
+  if (simulasyon.tip === "enerji") {
+    return <EnergyCanvas slug={slug} simulation={simulasyon} onComplete={() => {}} />;
+  }
+
+  if (simulasyon.tip === "itme") {
+    return <ImpulseCanvas slug={slug} simulation={simulasyon} onComplete={() => {}} />;
+  }
+
+  if (simulasyon.tip === "momentum") {
+    return <MomentumCanvas slug={slug} simulation={simulasyon} onComplete={() => {}} />;
+  }
+
+  if (simulasyon.tip === "elektrik-alan") {
+    return <ElectricFieldCanvas slug={slug} simulation={simulasyon} onComplete={() => {}} />;
+  }
+
+  if (simulasyon.tip === "elektrik-potansiyel") {
+    return <ElectricPotentialCanvas slug={slug} simulation={simulasyon} onComplete={() => {}} />;
+  }
+
+  if (simulasyon.tip === "paralel-levhalar-siga") {
+    return <CapacitorCanvas slug={slug} simulation={simulasyon} onComplete={() => {}} />;
+  }
+manyetik-alan") {
+    return <MagneticFieldCanvas slug={slug} simulation={simulasyon} onComplete={() => {}} />;
+  }
+
+  if (simulasyon.tip === "
   if (simulasyon.tip === "yatay-atis") {
     return <ProjectileSimulation slug={slug} simulasyon={simulasyon} />;
   }
@@ -93,6 +152,37 @@ export default function SimulationWrapper({
     return <VectorCanvas slug={slug} simulasyon={simulasyon} />;
   }
 
+  if (simulasyon.tip === "tork") {
+    return <TorqueCanvas slug={slug} simulation={simulasyon} onComplete={() => {}} />;
+  }
+
+  if (simulasyon.tip === "denge") {
+    return <EquilibriumCanvas slug={slug} simulation={simulasyon} onComplete={() => {}} />;
+  }
+
+  if (simulasyon.tip === "kutle-merkezi") {
+    return <CenterOfMassCanvas slug={slug} simulation={simulasyon} onComplete={() => {}} />;
+  }
+
+  if (simulasyon.tip === "kaldirac") {
+    return <LeverCanvas slug={slug} simulation={simulasyon} onComplete={() => {}} />;
+  }
+
+  if (simulasyon.tip === "makara") {
+    return <PulleyCanvas slug={slug} simulation={simulasyon} onComplete={() => {}} />;
+  }
+
+  if (simulasyon.tip === "egimli-duzlem-makine") {
+    return <InclinedPlaneCanvas slug={slug} simulation={simulasyon} onComplete={() => {}} />;
+  }
+  if (simulasyon.tip === "vida-kama") {
+    return <ScrewWedgeCanvas slug={slug} simulation={simulasyon} onComplete={() => {}} />;
+  }
+
+  if (simulasyon.tip === "disli-cark") {
+    return <GearCanvas slug={slug} simulation={simulasyon} onComplete={() => {}} />;
+  }
+  
   return <FreeFallSimulation slug={slug} simulasyon={simulasyon} />;
 }
 

@@ -1,0 +1,69 @@
+{
+  "id": "hareket",
+  "slug": "hareket",
+  "baslik": "Hareket",
+  "ozet": "Düzgün, ivmeli, bağıl hareket ve grafik analizleri.",
+  "analatim": "Hareket, bir cismin konumunun zamanla değişmesidir. Hız, ivme ve konum arasındaki ilişkiler hareketin temelini oluşturur. Grafikler bu ilişkileri görselleştirmenin en etkili yoludur...",
+  "formuller": [
+    { "label": "Ortalama hız", "latex": "v = \\frac{\\Delta x}{\\Delta t}" },
+    { "label": "İvme", "latex": "a = \\frac{\\Delta v}{\\Delta t}" },
+    { "label": "Konum (ivmeli)", "latex": "x = x_0 + v_0 t + \\frac{1}{2}at^2" },
+    { "label": "Hız (ivmeli)", "latex": "v = v_0 + at" },
+    { "label": "Hız-konum", "latex": "v^2 = v_0^2 + 2a\\Delta x" },
+    { "label": "Bağıl hız", "latex": "v_{AB} = v_A - v_B" }
+  ],
+  "sorular": [
+    {
+      "id": 1,
+      "soru": "Sabit 20 m/s hızla giden araç 5 saniyede kaç metre yol alır?",
+      "secenekler": ["50 m", "100 m", "150 m", "200 m"],
+      "dogru": 1,
+      "cozum_adimlari": [
+        "Düzgün harekette x = v · t formülünü kullanıyoruz.",
+        "x = 20 · 5",
+        "x = 100 m"
+      ]
+    },
+    {
+      "id": 2,
+      "soru": "Duruyorken harekete geçen araç 4 m/s² ivmeyle 10 saniye hızlanırsa son hızı nedir?",
+      "secenekler": ["20 m/s", "30 m/s", "40 m/s", "50 m/s"],
+      "dogru": 2,
+      "cozum_adimlari": [
+        "v = v₀ + at formülünü kullanıyoruz.",
+        "v = 0 + 4 · 10",
+        "v = 40 m/s"
+      ]
+    },
+    {
+      "id": 3,
+      "soru": "Hız-zaman grafiğinde eğim neyi verir?",
+      "secenekler": ["Konumu", "Hızı", "İvmeyi", "Yolu"],
+      "dogru": 2,
+      "cozum_adimlari": [
+        "Hız-zaman grafiğinde dikey eksen hızı, yatay eksen zamanı gösterir.",
+        "Eğim = Δv/Δt tanımı gereği ivmeye eşittir.",
+        "Grafik altında kalan alan ise alınan yolu verir."
+      ]
+    },
+    {
+      "id": 4,
+      "soru": "60 m/s hızla giden A aracı, aynı yönde 40 m/s hızla giden B aracına göre bağıl hızı nedir?",
+      "secenekler": ["20 m/s", "40 m/s", "60 m/s", "100 m/s"],
+      "dogru": 0,
+      "cozum_adimlari": [
+        "v_AB = v_A - v_B formülünü kullanıyoruz.",
+        "v_AB = 60 - 40",
+        "v_AB = 20 m/s (A'nın B'ye göre hızı)"
+      ]
+    }
+  ],
+  "simulasyon": {
+    "tip": "hareket",
+    "zorunlu_deney": {
+      "aciklama": "İvmeli hareket modunda başlangıç hızını 0, ivmeyi 4 m/s² olarak ayarla. 5. saniyedeki hızın 20 m/s olduğunu gözlemle.",
+      "hedef_degisken": "anlik_hiz",
+      "hedef_aralik": { "min": 19.5, "max": 20.5 }
+    }
+  }
+}

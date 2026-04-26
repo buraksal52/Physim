@@ -1,4 +1,5 @@
 [
+  { "slug": "hareket", "unlocks": "serbest-dusme" },
   { "slug": "serbest-dusme", "unlocks": "yatay-atis" },
   { "slug": "yatay-atis", "unlocks": "asagidan-yukari-atis" },
   { "slug": "asagidan-yukari-atis", "unlocks": "yukaridan-asagi-atis" },
@@ -8,5 +9,23 @@
   { "slug": "newton-2-yasa", "unlocks": "newton-3-yasa" },
   { "slug": "newton-3-yasa", "unlocks": "vektorler" },
   { "slug": "vektorler", "unlocks": "kuvvet" },
-  { "slug": "kuvvet", "unlocks": null }
+  { "slug": "kuvvet", "unlocks": "tork" },
+  { "slug": "tork", "unlocks": "denge" },
+  { "slug": "denge", "unlocks": "kutle-merkezi" },
+  { "slug": "kutle-merkezi", "unlocks": "basit-makineler-kaldirac" },
+  { "slug": "basit-makineler-kaldirac", "unlocks": "basit-makineler-makara" },
+  { "slug": "basit-makineler-makara", "unlocks": "basit-makineler-egimli-duzlem" },
+  { "slug": "basit-makineler-egimli-duzlem", "unlocks": "basit-makineler-vida-kama" },
+  { "slug": "basit-makineler-vida-kama", "unlocks": "basit-makineler-disli-cark" },
+  { "slug": "basit-makineler-disli-cark", "unlocks": "is" },
+  { "slug": "is", "unlocks": "guc" },
+  { "slug": "guc", "unlocks": "enerji" },
+  { "slug": "enerji", "unlocks": "itme" },
+  { "slug": "itme", "unlocks": "momentum" },
+  { "slug": "momentum", "unlocks": "elektrik-alan" },
+  { "slug": "elektrik-alan", "unlocks": "elektrik-potansiyel" },
+  { "slug": "elektrik-potansiyel", "unlocks": "paralel-levhalar-siga" },
+  { "slug": "paralel-levhalar-siga", "unlocks": "manyetik-alan" },
+  { "slug": "manyetik-alan", "unlocks": "manyetik-kuvvet" },
+  { "slug": "manyetik-kuvvet", "unlocks": null }
 ]

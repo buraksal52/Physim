@@ -1,0 +1,60 @@
+{
+  "id": "basit-makineler-disli-cark",
+  "slug": "basit-makineler-disli-cark",
+  "baslik": "Basit Makineler: Dişli Çarklar",
+  "ozet": "Birbirine geçen dişli çarklarla devir sayısı ve tork aktarımı.",
+  "analatim": "Dişli çarklar birbirine geçen dişler aracılığıyla hareket ve kuvvet aktarır. Büyük dişliden küçük dişliye geçildiğinde devir sayısı artar, tork azalır. Küçükten büyüğe geçildiğinde ise devir azalır, tork artar...",
+  "formuller": [
+    { "label": "Dişli oranı", "latex": "i = \\frac{N_1}{N_2} = \\frac{\\omega_2}{\\omega_1} = \\frac{T_2}{T_1}" },
+    { "label": "Devir ilişkisi", "latex": "N_1 \\cdot n_1 = N_2 \\cdot n_2" },
+    { "label": "Tork ilişkisi", "latex": "\\frac{T_2}{T_1} = \\frac{N_2}{N_1}" }
+  ],
+  "sorular": [
+    {
+      "id": 1,
+      "soru": "20 dişli çark 60 dişli çarkla geçişiyor. Küçük çark 300 rpm dönüyorsa büyük çarkın devri nedir?",
+      "secenekler": ["50 rpm", "100 rpm", "200 rpm", "900 rpm"],
+      "dogru": 1,
+      "cozum_adimlari": [
+        "N₁ · n₁ = N₂ · n₂ formülünü kullanıyoruz.",
+        "20 · 300 = 60 · n₂",
+        "n₂ = 6000 / 60 = 100 rpm"
+      ]
+    },
+    {
+      "id": 2,
+      "soru": "Sürücü dişlinin dişi 10, güdülen dişlinin dişi 40 ise dişli oranı nedir?",
+      "secenekler": ["0.25", "0.5", "4", "400"],
+      "dogru": 0,
+      "cozum_adimlari": [
+        "i = N_sürücü / N_güdülen formülünü kullanıyoruz.",
+        "i = 10 / 40",
+        "i = 0.25"
+      ]
+    },
+    {
+      "id": 3,
+      "soru": "Küçük dişliden büyük dişliye geçildiğinde tork nasıl değişir?",
+      "secenekler": [
+        "Azalır",
+        "Değişmez",
+        "Artar",
+        "Sıfır olur"
+      ],
+      "dogru": 2,
+      "cozum_adimlari": [
+        "T₂/T₁ = N₂/N₁ formülünde N₂ > N₁ olduğundan",
+        "T₂ > T₁ olur.",
+        "Büyük dişlide tork artar, devir azalır."
+      ]
+    }
+  ],
+  "simulasyon": {
+    "tip": "disli-cark",
+    "zorunlu_deney": {
+      "aciklama": "Sürücü dişliye 20 diş, güdülen dişliye 60 diş ver. Sürücüyü 300 rpm döndür ve güdülenin 100 rpm döndüğünü gözlemle.",
+      "hedef_degisken": "gudülen_devir",
+      "hedef_aralik": { "min": 98, "max": 102 }
+    }
+  }
+}

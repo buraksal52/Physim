@@ -1,0 +1,61 @@
+{
+  "id": "basit-makineler-egimli-duzlem",
+  "slug": "basit-makineler-egimli-duzlem",
+  "baslik": "Basit Makineler: Eğimli Düzlem",
+  "ozet": "Yükü daha az kuvvetle yukarı taşımayı sağlayan eğik yüzey.",
+  "analatim": "Eğimli düzlem, yükleri daha uzun bir yol boyunca daha az kuvvetle yukarı taşımayı sağlar. Açı küçüldükçe gereken kuvvet azalır ancak yol uzar. Kuvvet ve yol kazanımları birbirinin tersidir...",
+  "formuller": [
+    { "label": "Gereken kuvvet", "latex": "F = mg\\sin\\theta" },
+    { "label": "Kuvvet kazancı", "latex": "KK = \\frac{mg}{F} = \\frac{1}{\\sin\\theta}" },
+    { "label": "Yol oranı", "latex": "\\frac{L}{h} = \\frac{1}{\\sin\\theta}" },
+    { "label": "Verim (sürtünmeli)", "latex": "\\eta = \\frac{\\tan\\theta}{\\tan\\theta + \\mu}" }
+  ],
+  "sorular": [
+    {
+      "id": 1,
+      "soru": "30° eğimli düzlemde 10 kg kütleyi yukarı itmek için gereken kuvvet nedir? (g = 10 m/s², sürtünmesiz)",
+      "secenekler": ["25 N", "50 N", "86.6 N", "100 N"],
+      "dogru": 1,
+      "cozum_adimlari": [
+        "F = mg·sinθ formülünü kullanıyoruz.",
+        "F = 10 · 10 · sin30°",
+        "F = 100 · 0.5 = 50 N"
+      ]
+    },
+    {
+      "id": 2,
+      "soru": "Eğim açısı küçüldükçe gereken kuvvet nasıl değişir?",
+      "secenekler": [
+        "Artar",
+        "Azalır",
+        "Değişmez",
+        "Önce azalır sonra artar"
+      ],
+      "dogru": 1,
+      "cozum_adimlari": [
+        "F = mg·sinθ formülünde θ küçülürse sinθ de küçülür.",
+        "Bu nedenle gereken kuvvet azalır.",
+        "Ancak yol uzar — enerji korunumu bozulmaz."
+      ]
+    },
+    {
+      "id": 3,
+      "soru": "Yüksekliği 3 m, eğik yüzey uzunluğu 6 m olan eğimli düzlemin kuvvet kazancı nedir?",
+      "secenekler": ["0.5", "1", "2", "3"],
+      "dogru": 2,
+      "cozum_adimlari": [
+        "KK = L/h formülünü kullanıyoruz.",
+        "KK = 6 / 3",
+        "KK = 2"
+      ]
+    }
+  ],
+  "simulasyon": {
+    "tip": "egimli-duzlem-makine",
+    "zorunlu_deney": {
+      "aciklama": "Açıyı 30°, kütleyi 10 kg olarak ayarla (sürtünmesiz). Gereken kuvvetin 50 N olduğunu gözlemle.",
+      "hedef_degisken": "gereken_kuvvet",
+      "hedef_aralik": { "min": 49, "max": 51 }
+    }
+  }
+}

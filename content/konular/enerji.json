@@ -1,0 +1,62 @@
+{
+  "id": "enerji",
+  "slug": "enerji",
+  "baslik": "Enerji",
+  "ozet": "Potansiyel ve kinetik enerji ile enerji korunumu.",
+  "analatim": "Enerji, iş yapabilme kapasitesidir. Kinetik enerji hareketten, potansiyel enerji konumdan kaynaklanır. Sürtünmesiz sistemlerde toplam mekanik enerji korunur — potansiyel ve kinetik enerji birbirine dönüşür...",
+  "formuller": [
+    { "label": "Kinetik enerji", "latex": "E_k = \\frac{1}{2}mv^2" },
+    { "label": "Potansiyel enerji", "latex": "E_p = mgh" },
+    { "label": "Toplam mekanik enerji", "latex": "E_{mek} = E_k + E_p" },
+    { "label": "Enerji korunumu", "latex": "E_{k1} + E_{p1} = E_{k2} + E_{p2}" },
+    { "label": "İş-enerji teoremi", "latex": "W_{net} = \\Delta E_k" }
+  ],
+  "sorular": [
+    {
+      "id": 1,
+      "soru": "20 m/s hızla hareket eden 2 kg kütleli cismin kinetik enerjisi nedir?",
+      "secenekler": ["40 J", "200 J", "400 J", "800 J"],
+      "dogru": 2,
+      "cozum_adimlari": [
+        "Ek = ½mv² formülünü kullanıyoruz.",
+        "Ek = ½ · 2 · 20²",
+        "Ek = 1 · 400 = 400 J"
+      ]
+    },
+    {
+      "id": 2,
+      "soru": "5 kg kütleli cisim 10 m yüksekten serbest bırakılıyor. Yere çarpmadan hemen önceki hızı nedir? (g = 10 m/s²)",
+      "secenekler": ["5 m/s", "10 m/s", "14.1 m/s", "20 m/s"],
+      "dogru": 2,
+      "cozum_adimlari": [
+        "Enerji korunumunu kullanıyoruz: mgh = ½mv²",
+        "v² = 2gh = 2 · 10 · 10 = 200",
+        "v = √200 ≈ 14.1 m/s"
+      ]
+    },
+    {
+      "id": 3,
+      "soru": "Sarkaçta en yüksek noktada hangi enerji maksimum, hangisi sıfırdır?",
+      "secenekler": [
+        "Kinetik max, potansiyel sıfır",
+        "Potansiyel max, kinetik sıfır",
+        "İkisi de maksimum",
+        "İkisi de sıfır"
+      ],
+      "dogru": 1,
+      "cozum_adimlari": [
+        "En yüksek noktada sarkaç anlık olarak durur → v = 0.",
+        "Ek = ½mv² = 0 olur.",
+        "Tüm enerji potansiyel enerjiye dönüşmüştür."
+      ]
+    }
+  ],
+  "simulasyon": {
+    "tip": "enerji",
+    "zorunlu_deney": {
+      "aciklama": "Sarkıç modunda başlangıç yüksekliğini 5 m olarak ayarla. En alt noktada hızın yaklaşık 9.9 m/s olduğunu gözlemle.",
+      "hedef_degisken": "alt_nokta_hiz",
+      "hedef_aralik": { "min": 9.5, "max": 10.2 }
+    }
+  }
+}

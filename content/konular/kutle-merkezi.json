@@ -1,0 +1,65 @@
+{
+  "id": "kutle-merkezi",
+  "slug": "kutle-merkezi",
+  "baslik": "Kütle Merkezi",
+  "ozet": "Bir cismin ya da cisim sisteminin kütlesinin etkili olduğu nokta.",
+  "analatim": "Kütle merkezi, bir cisim sisteminin toplam kütlesinin tek bir noktada toplandığı varsayıldığında dış kuvvetlerin etki ettiği noktadır. Düzgün ve simetrik cisimlerde geometrik merkezle çakışır. Düzensiz cisimlerde ise kütlenin yoğunlaştığı tarafa kayar...",
+  "formuller": [
+    { "label": "X koordinatı", "latex": "x_{cm} = \\frac{\\sum m_i x_i}{\\sum m_i}" },
+    { "label": "Y koordinatı", "latex": "y_{cm} = \\frac{\\sum m_i y_i}{\\sum m_i}" },
+    { "label": "İki cisim", "latex": "x_{cm} = \\frac{m_1 x_1 + m_2 x_2}{m_1 + m_2}" }
+  ],
+  "sorular": [
+    {
+      "id": 1,
+      "soru": "2 kg kütleli cisim x=1 m, 4 kg kütleli cisim x=4 m konumunda. Kütle merkezi nerededir?",
+      "secenekler": ["x = 2 m", "x = 3 m", "x = 2.5 m", "x = 3.5 m"],
+      "dogru": 1,
+      "cozum_adimlari": [
+        "x_cm = (m₁x₁ + m₂x₂) / (m₁ + m₂) formülünü kullanıyoruz.",
+        "x_cm = (2·1 + 4·4) / (2 + 4)",
+        "x_cm = (2 + 16) / 6 = 18 / 6 = 3 m"
+      ]
+    },
+    {
+      "id": 2,
+      "soru": "Simetrik ve düzgün yoğunluklu bir cismin kütle merkezi nerededir?",
+      "secenekler": [
+        "En ağır noktasında",
+        "Geometrik merkezinde",
+        "En hafif noktasında",
+        "Alt yüzeyinde"
+      ],
+      "dogru": 1,
+      "cozum_adimlari": [
+        "Düzgün yoğunluklu cisimlerde kütle her yere eşit dağılır.",
+        "Simetri nedeniyle ağırlıklı ortalama geometrik merkeze denk gelir.",
+        "Kütle merkezi geometrik merkezle çakışır."
+      ]
+    },
+    {
+      "id": 3,
+      "soru": "L şeklindeki bir cismin kütle merkezi için ne söylenebilir?",
+      "secenekler": [
+        "Her zaman cismin içindedir",
+        "Her zaman cismin dışındadır",
+        "Cismin dışında olabilir",
+        "Köşe noktasındadır"
+      ],
+      "dogru": 2,
+      "cozum_adimlari": [
+        "Kütle merkezi her zaman cismin içinde olmak zorunda değildir.",
+        "L, U gibi düzensiz şekillerde kütle merkezi boşlukta kalabilir.",
+        "Kütle yoğunluğunun geometrik ağırlık merkezine göre hesaplanması gerekir."
+      ]
+    }
+  ],
+  "simulasyon": {
+    "tip": "kutle-merkezi",
+    "zorunlu_deney": {
+      "aciklama": "Nokta kütleler modunda x=1 konumuna 3 kg, x=5 konumuna 1 kg yerleştir. Kütle merkezinin x=2 olduğunu gözlemle.",
+      "hedef_degisken": "xcm",
+      "hedef_aralik": { "min": 1.9, "max": 2.1 }
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "id": "is",
+  "slug": "is",
+  "baslik": "İş",
+  "ozet": "Bir kuvvetin cismi hareket ettirmesi sonucu yapılan iş.",
+  "analatim": "İş, bir kuvvetin cisim üzerindeki etkisiyle cismin hareket etmesi sonucu ortaya çıkan fiziksel büyüklüktür. Kuvvet ile yol arasındaki açıya bağlıdır. Kuvvet harekete dik uygulanırsa iş sıfırdır...",
+  "formuller": [
+    { "label": "İş", "latex": "W = F \\cdot d \\cdot \\cos\\theta" },
+    { "label": "Değişken kuvvet", "latex": "W = \\int F \\, dx" },
+    { "label": "Net iş", "latex": "W_{net} = \\sum W_i" }
+  ],
+  "sorular": [
+    {
+      "id": 1,
+      "soru": "Yatay düzlemde 50 N kuvvetle 10 m yol alan cisme yapılan iş nedir? (kuvvet yatay)",
+      "secenekler": ["50 J", "250 J", "500 J", "1000 J"],
+      "dogru": 2,
+      "cozum_adimlari": [
+        "W = F · d · cosθ formülünü kullanıyoruz.",
+        "θ = 0° olduğundan cos0° = 1",
+        "W = 50 · 10 · 1 = 500 J"
+      ]
+    },
+    {
+      "id": 2,
+      "soru": "Cisme dik uygulanan kuvvetin yaptığı iş nedir?",
+      "secenekler": ["Maksimum", "Minimum", "Sıfır", "Negatif"],
+      "dogru": 2,
+      "cozum_adimlari": [
+        "W = F · d · cosθ formülünde θ = 90°",
+        "cos90° = 0",
+        "W = 0 J — dik kuvvet iş yapmaz."
+      ]
+    },
+    {
+      "id": 3,
+      "soru": "60° açıyla 100 N kuvvet uygulanan cisim 5 m yol alıyor. Yapılan iş nedir?",
+      "secenekler": ["100 J", "250 J", "433 J", "500 J"],
+      "dogru": 1,
+      "cozum_adimlari": [
+        "W = F · d · cosθ formülünü kullanıyoruz.",
+        "W = 100 · 5 · cos60°",
+        "W = 500 · 0.5 = 250 J"
+      ]
+    }
+  ],
+  "simulasyon": {
+    "tip": "is",
+    "zorunlu_deney": {
+      "aciklama": "Eğimli düzlem modunda kuvveti 50 N, yolu 6 m, açıyı 0° olarak ayarla. Yapılan işin 300 J olduğunu gözlemle.",
+      "hedef_degisken": "yapilan_is",
+      "hedef_aralik": { "min": 298, "max": 302 }
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "id": "elektrik-potansiyel",
+  "slug": "elektrik-potansiyel",
+  "baslik": "Elektrik Potansiyel",
+  "ozet": "Birim pozitif yükün sahip olduğu elektrik potansiyel enerjisi.",
+  "analatim": "Elektrik potansiyel, birim pozitif yükün bir noktadaki potansiyel enerjisidir. Volt (V) birimiyle ölçülür. Eşpotansiyel yüzeyler üzerindeki tüm noktalar aynı potansiyele sahiptir ve alan çizgilerine her zaman diktir...",
+  "formuller": [
+    { "label": "Potansiyel", "latex": "V = k\\frac{Q}{r}" },
+    { "label": "Potansiyel enerji", "latex": "U = qV = k\\frac{qQ}{r}" },
+    { "label": "Potansiyel fark", "latex": "\\Delta V = V_A - V_B = -\\int_B^A \\vec{E} \\cdot d\\vec{r}" },
+    { "label": "Alan-potansiyel ilişkisi", "latex": "E = -\\frac{dV}{dr}" }
+  ],
+  "sorular": [
+    {
+      "id": 1,
+      "soru": "4×10⁻⁶ C yükten 2 m uzaklıktaki elektrik potansiyel nedir? (k = 9×10⁹ N·m²/C²)",
+      "secenekler": ["9000 V", "18000 V", "36000 V", "72000 V"],
+      "dogru": 1,
+      "cozum_adimlari": [
+        "V = kQ/r formülünü kullanıyoruz.",
+        "V = (9×10⁹ × 4×10⁻⁶) / 2",
+        "V = 36000 / 2 = 18000 V"
+      ]
+    },
+    {
+      "id": 2,
+      "soru": "Eşpotansiyel yüzeyler ile elektrik alan çizgileri arasındaki açı nedir?",
+      "secenekler": ["0°", "45°", "90°", "180°"],
+      "dogru": 2,
+      "cozum_adimlari": [
+        "Eşpotansiyel yüzeylerde potansiyel sabittir.",
+        "Alan çizgileri potansiyelin en hızlı değiştiği yönü gösterir.",
+        "Bu nedenle alan çizgileri eşpotansiyel yüzeylere her zaman diktir (90°)."
+      ]
+    },
+    {
+      "id": 3,
+      "soru": "3×10⁻⁶ C yük 500 V potansiyelli noktadan 200 V potansiyelli noktaya taşınıyor. Yapılan iş nedir?",
+      "secenekler": ["-900 μJ", "-0.9 mJ", "0.9 mJ", "900 mJ"],
+      "dogru": 1,
+      "cozum_adimlari": [
+        "W = q · ΔV = q · (V_A - V_B) formülünü kullanıyoruz.",
+        "W = 3×10⁻⁶ · (200 - 500)",
+        "W = 3×10⁻⁶ · (−300) = −9×10⁻⁴ J = −0.9 mJ"
+      ]
+    }
+  ],
+  "simulasyon": {
+    "tip": "elektrik-potansiyel",
+    "zorunlu_deney": {
+      "aciklama": "Eşpotansiyel eğriler modunda 4×10⁻⁶ C yük yerleştir. Yükten 2 m uzaklıktaki potansiyelin 18000 V olduğunu gözlemle.",
+      "hedef_degisken": "potansiyel",
+      "hedef_aralik": { "min": 17000, "max": 19000 }
+    }
+  }
+}

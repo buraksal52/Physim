@@ -1,0 +1,60 @@
+{
+  "id": "basit-makineler-kaldirac",
+  "slug": "basit-makineler-kaldirac",
+  "baslik": "Basit Makineler: Kaldıraç",
+  "ozet": "Destek noktası etrafında dönen sert çubukla kuvvet kazancı sağlayan basit makine.",
+  "analatim": "Kaldıraç, bir destek noktası (fulcrum) etrafında dönen sert bir çubuktur. Kuvvet kolu ve yük kolu uzunluklarına göre üç sınıfa ayrılır. Kaldıraçta altın kural: kazanılan kuvvet, kaybedilen yolla orantılıdır...",
+  "formuller": [
+    { "label": "Denge koşulu", "latex": "F_k \\cdot d_k = F_y \\cdot d_y" },
+    { "label": "Kuvvet kazancı", "latex": "KK = \\frac{F_y}{F_k} = \\frac{d_k}{d_y}" },
+    { "label": "Verim", "latex": "\\eta = \\frac{W_{faydalı}}{W_{harcanan}} \\times 100" }
+  ],
+  "sorular": [
+    {
+      "id": 1,
+      "soru": "Kuvvet kolu 4 m, yük kolu 1 m olan kaldıraçta 200 N yükü kaldırmak için gereken kuvvet nedir?",
+      "secenekler": ["25 N", "50 N", "100 N", "200 N"],
+      "dogru": 1,
+      "cozum_adimlari": [
+        "F_k · d_k = F_y · d_y denge koşulunu kullanıyoruz.",
+        "F_k · 4 = 200 · 1",
+        "F_k = 200 / 4 = 50 N"
+      ]
+    },
+    {
+      "id": 2,
+      "soru": "Birinci sınıf kaldıraçta destek noktası nerededir?",
+      "secenekler": [
+        "Yük tarafında",
+        "Kuvvet ve yük arasında",
+        "Kuvvet tarafında",
+        "Çubuğun ucunda"
+      ],
+      "dogru": 1,
+      "cozum_adimlari": [
+        "Birinci sınıf kaldıraçta fulcrum ortadadır.",
+        "Kuvvet bir uçtan, yük diğer uçtan etki eder.",
+        "Makas, tahterevalli bu sınıfa örnek verilebilir."
+      ]
+    },
+    {
+      "id": 3,
+      "soru": "Kuvvet kazancı 5 olan kaldıraçta kuvvet kolu yük kolunun kaç katıdır?",
+      "secenekler": ["1/5", "1", "5", "25"],
+      "dogru": 2,
+      "cozum_adimlari": [
+        "KK = d_k / d_y = 5 olduğundan",
+        "d_k = 5 · d_y",
+        "Kuvvet kolu yük kolunun 5 katıdır."
+      ]
+    }
+  ],
+  "simulasyon": {
+    "tip": "kaldirac",
+    "zorunlu_deney": {
+      "aciklama": "Kuvvet kolunu 4 m, yük kolunu 1 m olarak ayarla. 200 N yükü dengeleyen kuvvetin 50 N olduğunu gözlemle.",
+      "hedef_degisken": "denge_kuvveti",
+      "hedef_aralik": { "min": 49, "max": 51 }
+    }
+  }
+}

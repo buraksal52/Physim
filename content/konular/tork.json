@@ -1,0 +1,60 @@
+{
+  "id": "tork",
+  "slug": "tork",
+  "baslik": "Tork",
+  "ozet": "Bir kuvvetin döndürme etkisini tanımlayan vektörel büyüklük.",
+  "analatim": "Tork, bir kuvvetin bir eksen etrafında oluşturduğu döndürme etkisidir. Kuvvetin büyüklüğüne, pivot noktasına olan uzaklığa ve kuvvetin uygulama açısına bağlıdır. Newton·metre (N·m) birimiyle ifade edilir...",
+  "formuller": [
+    { "label": "Tork", "latex": "\\tau = F \\cdot d \\cdot \\sin\\theta" },
+    { "label": "Maksimum tork", "latex": "\\tau_{max} = F \\cdot d \\quad (\\theta = 90°)" },
+    { "label": "Net tork", "latex": "\\tau_{net} = \\sum \\tau" }
+  ],
+  "sorular": [
+    {
+      "id": 1,
+      "soru": "Pivot noktasından 0.5 m uzakta 90° açıyla 40 N kuvvet uygulanıyor. Tork nedir?",
+      "secenekler": ["10 N·m", "20 N·m", "40 N·m", "80 N·m"],
+      "dogru": 1,
+      "cozum_adimlari": [
+        "τ = F · d · sinθ formülünü kullanıyoruz.",
+        "τ = 40 · 0.5 · sin90°",
+        "τ = 40 · 0.5 · 1 = 20 N·m"
+      ]
+    },
+    {
+      "id": 2,
+      "soru": "Aynı kuvvet pivot noktasına daha yakın uygulanırsa tork ne olur?",
+      "secenekler": ["Artar", "Azalır", "Değişmez", "Sıfır olur"],
+      "dogru": 1,
+      "cozum_adimlari": [
+        "τ = F · d · sinθ formülünde d azalıyor.",
+        "F ve θ sabit kalırken d küçülürse τ de küçülür.",
+        "Tork azalır."
+      ]
+    },
+    {
+      "id": 3,
+      "soru": "Kapıyı menteşe noktasından 10 cm uzaktan 50 N ile itmek yerine 80 cm uzaktan itmek tork üzerinde nasıl etki eder?",
+      "secenekler": [
+        "Tork 8 kat artar",
+        "Tork 8 kat azalır",
+        "Tork değişmez",
+        "Tork 4 kat artar"
+      ],
+      "dogru": 0,
+      "cozum_adimlari": [
+        "τ = F · d formülünde F sabit, d değişiyor.",
+        "d₁ = 0.10 m → d₂ = 0.80 m",
+        "Oran: 0.80 / 0.10 = 8 kat artış."
+      ]
+    }
+  ],
+  "simulasyon": {
+    "tip": "tork",
+    "zorunlu_deney": {
+      "aciklama": "Çubuk modunda pivot noktasından 3 m uzağa sağa 90° açıyla 20 N kuvvet uygula. Torkun 60 N·m olduğunu gözlemle. (Konum alanına 3 yazmalısın)",
+      "hedef_degisken": "tork",
+      "hedef_aralik": { "min": 59, "max": 61 }
+    }
+  }
+}

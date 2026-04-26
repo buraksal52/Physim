@@ -66,9 +66,9 @@ export default function HomeClient({ topics }: HomeClientProps) {
 
         <div className="mt-6 grid gap-4">
           {topics.map((topic, idx) => {
-            // First topic always unlocked, rest unlock when previous is complete
-            const isUnlocked =
-              idx === 0 || completedSlugs.has(topics[idx - 1].slug);
+            // TODO: Temporary unlock all topics. Restore original logic later.
+            // const isUnlocked = idx === 0 || completedSlugs.has(topics[idx - 1].slug);
+            const isUnlocked = true;
             const isCompleted = completedSlugs.has(topic.slug);
 
             return (
