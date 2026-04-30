@@ -111,11 +111,14 @@ export default function SimulationWrapper({
   if (simulasyon.tip === "paralel-levhalar-siga") {
     return <CapacitorCanvas slug={slug} simulation={simulasyon} onComplete={() => {}} />;
   }
-manyetik-alan") {
+  if (simulasyon.tip === "manyetik-alan") {
     return <MagneticFieldCanvas slug={slug} simulation={simulasyon} onComplete={() => {}} />;
   }
 
-  if (simulasyon.tip === "
+  if (simulasyon.tip === "manyetik-kuvvet") {
+    return <MagneticForceCanvas slug={slug} simulation={simulasyon} onComplete={() => {}} />;
+  }
+
   if (simulasyon.tip === "yatay-atis") {
     return <ProjectileSimulation slug={slug} simulasyon={simulasyon} />;
   }
