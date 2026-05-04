@@ -1,0 +1,61 @@
+{
+  "id": "transformator",
+  "slug": "transformator",
+  "baslik": "Transformatörler",
+  "ozet": "Alternatif akım gerilimini yükselten veya düşüren elektromanyetik cihaz.",
+  "analatim": "Transformatör, elektromanyetik indüksiyon prensibine göre çalışan ve AC gerilimini yükseltmek veya düşürmek için kullanılan cihazdır. Primer sargıya uygulanan AC gerilim, değişen manyetik akı oluşturur ve bu akı sekonder sargıda EMK indükler. İdeal transformatörde güç korunur...",
+  "formuller": [
+    { "label": "Gerilim oranı", "latex": "\\frac{V_1}{V_2} = \\frac{N_1}{N_2}" },
+    { "label": "Akım oranı", "latex": "\\frac{I_1}{I_2} = \\frac{N_2}{N_1}" },
+    { "label": "Güç korunumu", "latex": "V_1 I_1 = V_2 I_2" },
+    { "label": "Verim", "latex": "\\eta = \\frac{P_2}{P_1} \\times 100" }
+  ],
+  "sorular": [
+    {
+      "id": 1,
+      "soru": "Primer sargısı 500, sekonder sargısı 100 olan transformatöre 220 V uygulanıyor. Çıkış gerilimi nedir?",
+      "secenekler": ["22 V", "44 V", "110 V", "440 V"],
+      "dogru": 1,
+      "cozum_adimlari": [
+        "V₁/V₂ = N₁/N₂ formülünü kullanıyoruz.",
+        "220/V₂ = 500/100",
+        "V₂ = 220 × 100/500 = 44 V"
+      ]
+    },
+    {
+      "id": 2,
+      "soru": "İdeal transformatörde primer akımı 2 A, sarım oranı N₁/N₂ = 1/5 ise sekonder akımı nedir?",
+      "secenekler": ["0.4 A", "2 A", "5 A", "10 A"],
+      "dogru": 0,
+      "cozum_adimlari": [
+        "I₁/I₂ = N₂/N₁ formülünü kullanıyoruz.",
+        "2/I₂ = 5/1 → I₂ = 2/5",
+        "I₂ = 0.4 A"
+      ]
+    },
+    {
+      "id": 3,
+      "soru": "Transformatörler neden yalnızca AC ile çalışır?",
+      "secenekler": [
+        "DC çok tehlikelidir",
+        "DC değişmeyen akı oluşturur, EMK indüklenmez",
+        "AC daha ucuzdur",
+        "Transformatörler DC ile de çalışır"
+      ],
+      "dogru": 1,
+      "cozum_adimlari": [
+        "Transformatör çalışması değişen manyetik akıya dayanır.",
+        "DC sabit akım oluşturur → sabit akı → ΔΦ/Δt = 0.",
+        "Faraday yasasına göre EMK = -NΔΦ/Δt = 0 olur, indüksiyon olmaz."
+      ]
+    }
+  ],
+  "simulasyon": {
+    "tip": "transformator",
+    "zorunlu_deney": {
+      "aciklama": "Primer sarımını 500, sekonder sarımını 100, giriş gerilimini 220 V olarak ayarla. Çıkış geriliminin 44 V olduğunu gözlemle.",
+      "hedef_degisken": "cikis_gerilimi",
+      "hedef_aralik": { "min": 43, "max": 45 }
+    }
+  }
+}

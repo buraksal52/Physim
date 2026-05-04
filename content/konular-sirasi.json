@@ -27,5 +27,8 @@
   { "slug": "elektrik-potansiyel", "unlocks": "paralel-levhalar-siga" },
   { "slug": "paralel-levhalar-siga", "unlocks": "manyetik-alan" },
   { "slug": "manyetik-alan", "unlocks": "manyetik-kuvvet" },
-  { "slug": "manyetik-kuvvet", "unlocks": null }
+  { "slug": "manyetik-kuvvet", "unlocks": "induksiyon" },
+  { "slug": "induksiyon", "unlocks": "alternatif-akim" },
+  { "slug": "alternatif-akim", "unlocks": "transformator" },
+  { "slug": "transformator", "unlocks": null }
 ]

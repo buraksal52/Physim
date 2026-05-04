@@ -63,6 +63,9 @@ import ElectricPotentialCanvas from "./ElectricPotentialCanvas";
 import CapacitorCanvas from "./CapacitorCanvas";
 import MagneticFieldCanvas from "./MagneticFieldCanvas";
 import MagneticForceCanvas from "./MagneticForceCanvas";
+import InductionCanvas from "./InductionCanvas";
+import ACCanvas from "./ACCanvas";
+import TransformerCanvas from "./TransformerCanvas";
 
 interface SimulationWrapperProps {
   slug: string;
@@ -117,6 +120,18 @@ export default function SimulationWrapper({
 
   if (simulasyon.tip === "manyetik-kuvvet") {
     return <MagneticForceCanvas slug={slug} simulation={simulasyon} onComplete={() => {}} />;
+  }
+
+  if (simulasyon.tip === "induksiyon") {
+    return <InductionCanvas slug={slug} simulation={simulasyon} onComplete={() => {}} />;
+  }
+
+  if (simulasyon.tip === "alternatif-akim") {
+    return <ACCanvas slug={slug} simulation={simulasyon} onComplete={() => {}} />;
+  }
+
+  if (simulasyon.tip === "transformator") {
+    return <TransformerCanvas slug={slug} simulation={simulasyon} onComplete={() => {}} />;
   }
 
   if (simulasyon.tip === "yatay-atis") {
