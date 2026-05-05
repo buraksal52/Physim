@@ -1,0 +1,66 @@
+{
+  "id": "donme-yuvarlanma-momentum",
+  "slug": "donme-yuvarlanma-momentum",
+  "baslik": "Dönme, Yuvarlanma ve Açısal Momentum",
+  "ozet": "Katı cisimlerin dönme hareketi, yuvarlanma dinamiği ve açısal momentumun korunumu.",
+  "analatim": "Dönme hareketi, doğrusal hareketin açısal karşılığıdır. Açısal hız, açısal ivme ve tork doğrusal hareketin hız, ivme ve kuvvet kavramlarına karşılık gelir. Atalet momenti cismin dönmeye karşı direncini ifade eder. Yuvarlanmada öteleme ve dönme hareketi birlikte gerçekleşir. Açısal momentum korunumu ise dış tork yoksa sistemin açısal momentumunun sabit kalmasını ifade eder...",
+  "formuller": [
+    { "label": "Açısal hız", "latex": "\\omega = \\frac{\\Delta\\theta}{\\Delta t}" },
+    { "label": "Açısal ivme", "latex": "\\alpha = \\frac{\\Delta\\omega}{\\Delta t}" },
+    { "label": "Tork-ivme", "latex": "\\tau = I \\cdot \\alpha" },
+    { "label": "Disk atalet momenti", "latex": "I = \\frac{1}{2}mr^2" },
+    { "label": "Halka atalet momenti", "latex": "I = mr^2" },
+    { "label": "Küre atalet momenti", "latex": "I = \\frac{2}{5}mr^2" },
+    { "label": "Yuvarlanma koşulu", "latex": "v = \\omega r" },
+    { "label": "Açısal momentum", "latex": "L = I \\cdot \\omega" },
+    { "label": "Açısal momentum korunumu", "latex": "I_1\\omega_1 = I_2\\omega_2" }
+  ],
+  "sorular": [
+    {
+      "id": 1,
+      "soru": "Kütlesi 4 kg, yarıçapı 0.5 m olan diskin atalet momenti nedir?",
+      "secenekler": ["0.25 kg·m²", "0.5 kg·m²", "1 kg·m²", "2 kg·m²"],
+      "dogru": 1,
+      "cozum_adimlari": [
+        "Disk için I = ½mr² formülünü kullanıyoruz.",
+        "I = ½ × 4 × 0.5²",
+        "I = ½ × 4 × 0.25 = 0.5 kg·m²"
+      ]
+    },
+    {
+      "id": 2,
+      "soru": "Aynı kütle ve yarıçapa sahip disk, halka ve küre rampadan bırakılıyor. Hangisi en önce iner?",
+      "secenekler": ["Halka", "Disk", "Küre", "Hepsi aynı anda"],
+      "dogru": 2,
+      "cozum_adimlari": [
+        "Yuvarlanmada a = gsinθ/(1 + I/mr²) formülü geçerlidir.",
+        "I/mr² oranı küre için 2/5, disk için 1/2, halka için 1'dir.",
+        "En küçük oran kürededir — küre en büyük ivmeyle iner."
+      ]
+    },
+    {
+      "id": 3,
+      "soru": "Kollarını içeri çeken dönüşçünün açısal hızı nasıl değişir?",
+      "secenekler": [
+        "Azalır",
+        "Değişmez",
+        "Artar",
+        "Sıfır olur"
+      ],
+      "dogru": 2,
+      "cozum_adimlari": [
+        "Açısal momentum korunumu: I₁ω₁ = I₂ω₂.",
+        "Kollar içeri alınınca I azalır.",
+        "I azalırsa ω artmak zorundadır — dönüşçü hızlanır."
+      ]
+    }
+  ],
+  "simulasyon": {
+    "tip": "donme-yuvarlanma-momentum",
+    "zorunlu_deney": {
+      "aciklama": "Yuvarlanma modunda küreyi seç, eğimi 30° yap ve rampa sonunda hızın disk ve halkadan büyük olduğunu gözlemle.",
+      "hedef_degisken": "kure_hizi",
+      "hedef_aralik": { "min": 0.1, "max": 100 }
+    }
+  }
+}

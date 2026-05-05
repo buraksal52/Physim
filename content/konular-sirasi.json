@@ -30,5 +30,10 @@
   { "slug": "manyetik-kuvvet", "unlocks": "induksiyon" },
   { "slug": "induksiyon", "unlocks": "alternatif-akim" },
   { "slug": "alternatif-akim", "unlocks": "transformator" },
-  { "slug": "transformator", "unlocks": null }
+  { "slug": "transformator", "unlocks": "cembersel-hareket" },
+  { "slug": "cembersel-hareket", "unlocks": "donme-yuvarlanma-momentum" },
+  { "slug": "donme-yuvarlanma-momentum", "unlocks": "kutle-cekim-kepler" },
+  { "slug": "kutle-cekim-kepler", "unlocks": "yay-kutle-bhh" },
+  { "slug": "yay-kutle-bhh", "unlocks": "sarkac-bhh" },
+  { "slug": "sarkac-bhh", "unlocks": null }
 ]

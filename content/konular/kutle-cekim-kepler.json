@@ -1,0 +1,64 @@
+{
+  "id": "kutle-cekim-kepler",
+  "slug": "kutle-cekim-kepler",
+  "baslik": "Kütle Çekim ve Kepler Yasaları",
+  "ozet": "Evrensel çekim yasası ve gezegen hareketlerini tanımlayan Kepler yasaları.",
+  "analatim": "Newton'un evrensel çekim yasasına göre kütleli her cisim birbirini çeker. Çekim kuvveti kütlelerle doğru, uzaklığın karesiyle ters orantılıdır. Kepler'in üç yasası gezegen hareketlerini tanımlar: gezegenler eliptik yörüngede döner, eşit zamanda eşit alan tarar ve periyotların karesi yarı büyük eksenin küpüyle orantılıdır...",
+  "formuller": [
+    { "label": "Evrensel çekim", "latex": "F = G\\frac{m_1 m_2}{r^2}" },
+    { "label": "Çekim sabiti", "latex": "G = 6.674 \\times 10^{-11} \\, \\text{N·m}^2/\\text{kg}^2" },
+    { "label": "Kepler 1. yasa", "latex": "\\text{Gezegenler eliptik yörüngede döner}" },
+    { "label": "Kepler 2. yasa", "latex": "\\frac{dA}{dt} = \\text{sabit}" },
+    { "label": "Kepler 3. yasa", "latex": "\\frac{T^2}{a^3} = \\frac{4\\pi^2}{GM}" },
+    { "label": "Yörünge hızı", "latex": "v = \\sqrt{\\frac{GM}{r}}" },
+    { "label": "Kaçış hızı", "latex": "v_{kacis} = \\sqrt{\\frac{2GM}{r}}" }
+  ],
+  "sorular": [
+    {
+      "id": 1,
+      "soru": "İki cisim arasındaki uzaklık 2 katına çıkarılırsa çekim kuvveti nasıl değişir?",
+      "secenekler": ["2 katına çıkar", "Yarıya düşer", "4 katına çıkar", "Dörtte birine düşer"],
+      "dogru": 3,
+      "cozum_adimlari": [
+        "F = Gm₁m₂/r² formülünde r 2 katına çıkıyor.",
+        "F ∝ 1/r² olduğundan r → 2r yapılırsa F → F/4 olur.",
+        "Çekim kuvveti dörtte birine düşer."
+      ]
+    },
+    {
+      "id": 2,
+      "soru": "Kepler'in 2. yasasına göre gezegen güneşe yaklaştıkça hızı nasıl değişir?",
+      "secenekler": [
+        "Azalır",
+        "Değişmez",
+        "Artar",
+        "Önce artar sonra azalır"
+      ],
+      "dogru": 2,
+      "cozum_adimlari": [
+        "Kepler 2. yasa: gezegen eşit zamanda eşit alan tarar.",
+        "Güneşe yakın yörüngede alanı taramak için daha hızlı hareket etmesi gerekir.",
+        "Gezegen güneşe yaklaştıkça hızlanır."
+      ]
+    },
+    {
+      "id": 3,
+      "soru": "Bir gezegenin yörünge yarıçapı 4 katına çıkarılırsa periyodu kaç katına çıkar?",
+      "secenekler": ["4", "8", "16", "64"],
+      "dogru": 1,
+      "cozum_adimlari": [
+        "Kepler 3. yasa: T² ∝ a³",
+        "a 4 katına çıkarsa a³ = 64 katına çıkar.",
+        "T² = 64T₀² → T = 8T₀ — periyot 8 katına çıkar."
+      ]
+    }
+  ],
+  "simulasyon": {
+    "tip": "kutle-cekim-kepler",
+    "zorunlu_deney": {
+      "aciklama": "Kepler 3. yasa modunda yarıçapı 4 birim yap ve periyodun 2 birim yarıçaplı yörüngeye göre 8 kat büyük olduğunu gözlemle.",
+      "hedef_degisken": "periyot_orani",
+      "hedef_aralik": { "min": 7.5, "max": 8.5 }
+    }
+  }
+}

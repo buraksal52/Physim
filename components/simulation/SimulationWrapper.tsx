@@ -66,6 +66,11 @@ import MagneticForceCanvas from "./MagneticForceCanvas";
 import InductionCanvas from "./InductionCanvas";
 import ACCanvas from "./ACCanvas";
 import TransformerCanvas from "./TransformerCanvas";
+import CircularMotionCanvas from "./CircularMotionCanvas";
+import RotationCanvas from "./RotationCanvas";
+import GravityCanvas from "./GravityCanvas";
+import SpringMassCanvas from "./SpringMassCanvas";
+import PendulumBHHCanvas from "./PendulumBHHCanvas";
 
 interface SimulationWrapperProps {
   slug: string;
@@ -132,6 +137,26 @@ export default function SimulationWrapper({
 
   if (simulasyon.tip === "transformator") {
     return <TransformerCanvas slug={slug} simulation={simulasyon} onComplete={() => {}} />;
+  }
+
+  if (simulasyon.tip === "cembersel-hareket") {
+    return <CircularMotionCanvas simulationData={simulasyon} />;
+  }
+
+  if (simulasyon.tip === "donme-yuvarlanma-momentum") {
+    return <RotationCanvas simulationData={simulasyon} />;
+  }
+
+  if (simulasyon.tip === "kutle-cekim-kepler") {
+    return <GravityCanvas simulationData={simulasyon} />;
+  }
+
+  if (simulasyon.tip === "yay-kutle-bhh") {
+    return <SpringMassCanvas simulationData={simulasyon} />;
+  }
+
+  if (simulasyon.tip === "sarkac-bhh") {
+    return <PendulumBHHCanvas simulationData={simulasyon} />;
   }
 
   if (simulasyon.tip === "yatay-atis") {

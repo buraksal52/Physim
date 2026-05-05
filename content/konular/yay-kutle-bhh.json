@@ -1,0 +1,69 @@
+{
+  "id": "yay-kutle-bhh",
+  "slug": "yay-kutle-bhh",
+  "baslik": "Basit Harmonik Hareket: Yay-Kütle",
+  "ozet": "Yay kuvvetinin etkisiyle oluşan periyodik salınım hareketi.",
+  "analatim": "Yay-kütle sisteminde cisim denge konumundan uzaklaştırıldığında yay onu geri çeker. Bu geri çekici kuvvet harekete sebep olur. Hareket sinüzoidal bir fonksiyonla tanımlanır ve sürtünme yoksa sonsuza kadar devam eder. Periyot yalnızca kütle ve yay sabitine bağlıdır, genliğe bağlı değildir...",
+  "formuller": [
+    { "label": "Yay kuvveti", "latex": "F = -kx" },
+    { "label": "Periyot", "latex": "T = 2\\pi\\sqrt{\\frac{m}{k}}" },
+    { "label": "Frekans", "latex": "f = \\frac{1}{2\\pi}\\sqrt{\\frac{k}{m}}" },
+    { "label": "Konum", "latex": "x(t) = A\\cos(\\omega t + \\phi)" },
+    { "label": "Açısal frekans", "latex": "\\omega = \\sqrt{\\frac{k}{m}}" },
+    { "label": "Maksimum hız", "latex": "v_{max} = A\\omega" },
+    { "label": "Maksimum ivme", "latex": "a_{max} = A\\omega^2" }
+  ],
+  "sorular": [
+    {
+      "id": 1,
+      "soru": "Yay sabiti 100 N/m, kütle 1 kg olan sistemin periyodu nedir?",
+      "secenekler": ["π/5 s", "π/10 s", "π/5 s", "2π/10 s"],
+      "dogru": 2,
+      "cozum_adimlari": [
+        "T = 2π√(m/k) formülünü kullanıyoruz.",
+        "T = 2π√(1/100) = 2π × 0.1",
+        "T = 2π/10 = π/5 s ≈ 0.628 s"
+      ]
+    },
+    {
+      "id": 2,
+      "soru": "BHH yapan cismin genliği 2 katına çıkarılırsa periyot nasıl değişir?",
+      "secenekler": [
+        "2 katına çıkar",
+        "Yarıya düşer",
+        "4 katına çıkar",
+        "Değişmez"
+      ],
+      "dogru": 3,
+      "cozum_adimlari": [
+        "T = 2π√(m/k) formülünde genlik A yoktur.",
+        "Periyot yalnızca m ve k'ya bağlıdır.",
+        "Genlik değişse de periyot değişmez."
+      ]
+    },
+    {
+      "id": 3,
+      "soru": "Denge noktasında geçerken cismin hızı ve ivmesi nasıldır?",
+      "secenekler": [
+        "Hız sıfır, ivme maksimum",
+        "Hız maksimum, ivme sıfır",
+        "İkisi de maksimum",
+        "İkisi de sıfır"
+      ],
+      "dogru": 1,
+      "cozum_adimlari": [
+        "Denge noktasında x = 0 olduğundan F = -kx = 0.",
+        "İvme a = F/m = 0 olur.",
+        "Tüm enerji kinetiktir → hız maksimum değerindedir."
+      ]
+    }
+  ],
+  "simulasyon": {
+    "tip": "yay-kutle-bhh",
+    "zorunlu_deney": {
+      "aciklama": "Yay sabitini 100 N/m, kütleyi 1 kg olarak ayarla. Periyodun yaklaşık 0.63 s olduğunu gözlemle.",
+      "hedef_degisken": "periyot",
+      "hedef_aralik": { "min": 0.6, "max": 0.66 }
+    }
+  }
+}
